@@ -1,9 +1,13 @@
 package com.dbaccess;
 
+import java.util.ArrayList;
+import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Repository {
     private static Repository repositoryInstance;
+
+    public List<StockItem> stockItems = new ArrayList<StockItem> ();
 
     private Repository() {
 //begin of modifiable zone(JavaSuper).....C/190b61f6-ae29-4a9a-9053-baf0f262fe57
@@ -24,6 +28,12 @@ public class Repository {
         }
         return repositoryInstance;
 //end of modifiable zone..................E/16ab4d42-20dd-4262-9dc7-7bd2403a12cc
+    }
+
+    public void updateStock() {
+//begin of modifiable zone(JavaCode)......C/0bc70e41-09c6-4ba0-a7e6-835a078e2cb5
+
+//end of modifiable zone(JavaCode)........E/0bc70e41-09c6-4ba0-a7e6-835a078e2cb5
     }
 
 }
