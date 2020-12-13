@@ -1,10 +1,7 @@
 package com.dbaccess;
 
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class StockFileAccess implements IFileAccess {
     private static StockFileAccess instance;
@@ -20,7 +17,7 @@ public class StockFileAccess implements IFileAccess {
         try {
             FileReader reader = new FileReader(stockFile);
             reader.read(contentArray);
-
+            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -32,7 +29,14 @@ public class StockFileAccess implements IFileAccess {
     @Override
     public synchronized void write(String newContent) {
 //begin of modifiable zone(JavaCode)......C/02427273-e11c-4c08-a0de-38f6ea53f916
-
+        File stockFile = new File("./resources/stock.json");
+        try {
+            FileWriter writer = new FileWriter(stockFile);
+            writer.write(newContent);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 //end of modifiable zone(JavaCode)........E/02427273-e11c-4c08-a0de-38f6ea53f916
     }
 

@@ -35,7 +35,20 @@ public class StockFileAccessTest {
     }
 
     @Test
-    public void write() {
+    public void writeMatchesTest() {
+        String testString = "{\"write\": \"test\"}";
+        StockFileAccess.getInstance().write(testString);
+        File testFile = new File("./resources/stock.json");
+        char[] contentArray = new char[(int)testFile.length()];
+        try {
+            FileReader reader = new FileReader(testFile);
+            reader.read(contentArray);
+            String writeString = new String(contentArray);
+            reader.close();
+            assertEquals(testString, writeString);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @After
