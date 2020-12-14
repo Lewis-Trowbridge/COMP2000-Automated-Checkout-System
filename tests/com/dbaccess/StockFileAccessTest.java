@@ -29,6 +29,11 @@ public class StockFileAccessTest {
     }
 
     @Test
+    public void singletonSingleInstance(){
+        assertEquals(StockFileAccess.getInstance(), StockFileAccess.getInstance());
+    }
+
+    @Test
     public void readMatchesFake() {
         String testContent = StockFileAccess.getInstance().read();
         assertEquals(testContent, fakeContent);

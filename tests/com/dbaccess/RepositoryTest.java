@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class RepositoryTest {
 
     @Test
-    public void testRepositorySingleton(){
+    public void singletonSingleInstance(){
         assertEquals(Repository.getRepositoryInstance(), Repository.getRepositoryInstance());
     }
 }

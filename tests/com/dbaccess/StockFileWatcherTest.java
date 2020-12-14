@@ -21,7 +21,7 @@ public class StockFileWatcherTest {
     }
 
     @Test
-    public void testRead(){
+    public void readNotifiesRepository(){
         List<StockItem> stockItems = new ArrayList<>();
         StockItem item = new StockItem();
         item.setItemId(1);
