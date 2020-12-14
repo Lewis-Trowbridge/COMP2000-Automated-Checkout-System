@@ -27,11 +27,12 @@ public class StockFileWatcherTest {
         item.setItemId(1);
         item.setItemName("Jam");
         item.setItemPrice(0.99f);
+        item.setStockCount(30);
         stockItems.add(item);
         testWatcher.start();
         try {
             Thread.sleep(2000);
-            String testString = "[{\"itemId\":1,\"itemName\":\"Jam\",\"itemPrice\":0.99}]";
+            String testString = "[{\"itemId\":1,\"itemName\":\"Jam\",\"itemPrice\":0.99,\"stockCount\":30}]";
             StockFileAccess.getInstance().write(testString);
             assertEquals(stockItems, Repository.getRepositoryInstance().stockItems);
         } catch (InterruptedException e) {
