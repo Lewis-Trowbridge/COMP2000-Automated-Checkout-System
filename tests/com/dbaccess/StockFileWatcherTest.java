@@ -16,25 +16,24 @@ public class StockFileWatcherTest {
     @Before
     public void setUp() throws Exception {
         testWatcher = new Thread(new StockFileWatcher());
+        testWatcher.setDaemon(true);
         realFileContent = StockFileAccess.getInstance().read();
     }
 
     @Test
     public void testRead(){
+        List<StockItem> stockItems = new ArrayList<>();
+        StockItem item = new StockItem();
+        item.setItemId(1);
+        item.setItemName("Jam");
+        item.setItemPrice(0.99f);
+        stockItems.add(item);
+        testWatcher.start();
         try {
-            List<StockItem> stockItems = new ArrayList<>();
-            StockItem item = new StockItem();
-            item.setItemId(1);
-            item.setItemName("Jam");
-            item.setItemPrice(0.99f);
-            stockItems.add(item);
-            System.out.println(Thread.currentThread());
-            testWatcher.start();
+            Thread.sleep(2000);
             String testString = "[{\"itemId\":1,\"itemName\":\"Jam\",\"itemPrice\":0.99}]";
             StockFileAccess.getInstance().write(testString);
-            Thread.sleep(1000);
             assertEquals(stockItems, Repository.getRepositoryInstance().stockItems);
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
