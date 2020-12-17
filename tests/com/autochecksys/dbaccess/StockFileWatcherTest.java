@@ -1,4 +1,4 @@
-package com.dbaccess;
+package com.autochecksys.dbaccess;
 
 import org.junit.Before;
 import org.junit.Test;

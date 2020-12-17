@@ -1,4 +1,4 @@
-package com.dbaccess;
+package com.autochecksys.dbaccess;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
