@@ -38,6 +38,8 @@ public class LoginPanel extends DisplayPanel {
         GridBagConstraints txfPasswordConstraints = builder.setGridX(1).setGridY(2).setFill(GridBagConstraints.HORIZONTAL).build();
         btnLogin = new JButton("Log in");
         GridBagConstraints btnLoginConstraints = builder.setGridX(2).setGridY(1).setGridHeight(2).setFill(GridBagConstraints.CENTER).build();
+        btnGoToCheckout = new JButton("Go to checkout");
+        GridBagConstraints btnGoToCheckoutConstraints = builder.setGridY(3).setGridHeight(3).setGridWidth(3).setFill(GridBagConstraints.BOTH).build();
 
 
         this.add(lblWelcome, lblWelcomeConstraints);
@@ -46,6 +48,7 @@ public class LoginPanel extends DisplayPanel {
         this.add(lblPasswordTitle, lblPasswordTitleConstraints);
         this.add(txfPassword, txfPasswordConstraints);
         this.add(btnLogin, btnLoginConstraints);
+        this.add(btnGoToCheckout, btnGoToCheckoutConstraints);
 //end of modifiable zone..................E/2459f603-8f00-4ce1-9791-7e89ff42841a
     }
 
