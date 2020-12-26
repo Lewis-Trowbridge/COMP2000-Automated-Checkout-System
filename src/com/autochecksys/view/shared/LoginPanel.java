@@ -1,11 +1,13 @@
 package com.autochecksys.view.shared;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.lang.reflect.InvocationTargetException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import com.autochecksys.KeyValuePair;
-import com.autochecksys.controller.shared.AbstractLoginController;
 
 public class LoginPanel extends DisplayPanel {
     public JLabel lblWelcome;
@@ -22,7 +24,6 @@ public class LoginPanel extends DisplayPanel {
 
     public JButton btnGoToCheckout;
 
-    @Override
     protected void setUpComponents() {
 //begin of modifiable zone................T/2459f603-8f00-4ce1-9791-7e89ff42841a
         // Set up grid layout manager on this panel
@@ -51,23 +52,39 @@ public class LoginPanel extends DisplayPanel {
         this.add(txfPassword, txfPasswordConstraints);
         this.add(btnLogin, btnLoginConstraints);
         this.add(btnGoToCheckout, btnGoToCheckoutConstraints);
+        
+        setUpEventListeners();
 //end of modifiable zone..................E/2459f603-8f00-4ce1-9791-7e89ff42841a
     }
 
-    public LoginPanel(MainFrame frameToDisplayIn, AbstractLoginController controllerToUse) {
+    public LoginPanel(MainFrame frameToDisplayIn) {
 //begin of modifiable zone................T/6ab92638-dda1-422e-a110-47259d475ba3
-super(frameToDisplayIn, controllerToUse);
+    super(frameToDisplayIn);
 
 //end of modifiable zone..................E/6ab92638-dda1-422e-a110-47259d475ba3
 //begin of modifiable zone(JavaCode)......C/dfe42758-3f75-43bf-9603-fa1768808e74
 //end of modifiable zone(JavaCode)........E/dfe42758-3f75-43bf-9603-fa1768808e74
     }
 
-    @Override
     public void update(KeyValuePair change) {
 //begin of modifiable zone................T/5f8eb331-cfd8-41cc-9ef2-de4b19313d77
         // Since we don't presently need to reflect any changes on screen, this method do not need to do anything for now
 //end of modifiable zone..................E/5f8eb331-cfd8-41cc-9ef2-de4b19313d77
+    }
+
+    private void setUpEventListeners() {
+//begin of modifiable zone................T/fbdd913e-818e-4d84-ab4c-b7ddac9d3ccf
+        this.btnGoToCheckout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controller.getClass().getDeclaredMethod("checkoutButtonClicked").invoke(controller, null);
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException noSuchMethodException) {
+                    noSuchMethodException.printStackTrace();
+                }
+            }
+        });
+//end of modifiable zone..................E/fbdd913e-818e-4d84-ab4c-b7ddac9d3ccf
     }
 
 }

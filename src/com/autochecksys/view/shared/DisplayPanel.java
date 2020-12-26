@@ -9,13 +9,12 @@ public abstract class DisplayPanel extends JPanel {
 
     public MainFrame mainFrameToUse;
 
-    public DisplayPanel(MainFrame frameToDisplayIn, AbstractController controllerToUse) {
+    public DisplayPanel(MainFrame frameToDisplayIn) {
 //begin of modifiable zone(JavaSuper).....C/91cfef97-d38e-4483-b34e-2f3628e871b5
 
 //end of modifiable zone(JavaSuper).......E/91cfef97-d38e-4483-b34e-2f3628e871b5
 //begin of modifiable zone................T/3a482217-5049-4e7e-96d3-fbf859f563f8
         this.mainFrameToUse = frameToDisplayIn;
-        this.controller = controllerToUse;
 //end of modifiable zone..................E/3a482217-5049-4e7e-96d3-fbf859f563f8
     }
 
@@ -35,5 +34,11 @@ public abstract class DisplayPanel extends JPanel {
     }
 
     public abstract void update(KeyValuePair change);
+
+    public void setController(AbstractController controller) {
+//begin of modifiable zone(JavaCode)......C/b752f754-8985-4cb0-9b0f-71152ac1d5d6
+        this.controller = controller;
+//end of modifiable zone(JavaCode)........E/b752f754-8985-4cb0-9b0f-71152ac1d5d6
+    }
 
 }
