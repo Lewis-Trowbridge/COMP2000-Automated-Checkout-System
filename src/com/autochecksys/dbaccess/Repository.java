@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectReader;
 
 public class Repository {
     private static Repository repositoryInstance;
@@ -15,8 +16,8 @@ public class Repository {
 
     private Repository() {
 //begin of modifiable zone................T/97abe80b-b10a-4b04-927e-85c05783e1f6
-    mapper = new ObjectMapper();
-    updateStock(StockFileAccess.getInstance().read());
+mapper = new ObjectMapper();
+populateStock(StockFileAccess.getInstance().read());
 
 //end of modifiable zone..................E/97abe80b-b10a-4b04-927e-85c05783e1f6
 //begin of modifiable zone(JavaCode)......C/190b61f6-ae29-4a9a-9053-baf0f262fe57
@@ -38,12 +39,23 @@ public class Repository {
 
     public void updateStock(String newJsonString) {
 //begin of modifiable zone................T/30b94964-74bc-44c1-a7d4-c27667a8e127
+        ObjectReader reader = mapper.readerForUpdating(stockItems);
+        try {
+            reader.readValue(newJsonString);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//end of modifiable zone..................E/30b94964-74bc-44c1-a7d4-c27667a8e127
+    }
+
+    public void populateStock(String newJsonString) {
+//begin of modifiable zone(JavaCode)......C/3df696fb-e145-4493-9e08-4c6f9551d2bd
         try {
             stockItems = mapper.readValue(newJsonString, new TypeReference<List<StockItem>>() { });
         } catch (IOException e) {
             e.printStackTrace(System.out);
         }
-//end of modifiable zone..................E/30b94964-74bc-44c1-a7d4-c27667a8e127
+//end of modifiable zone(JavaCode)........E/3df696fb-e145-4493-9e08-4c6f9551d2bd
     }
 
 }
