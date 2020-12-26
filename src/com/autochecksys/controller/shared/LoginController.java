@@ -34,7 +34,10 @@ public class LoginController extends AbstractLoginController {
 
     public void checkoutButtonClicked() {
 //begin of modifiable zone................T/d175dac0-8632-4105-b164-1e61a802d9c3
-        System.out.println("Method reached");
+        KioskPanel panel = new KioskPanel(viewToControl.mainFrameToUse);
+        // TODO: Replace with creation of new KioskController once it exists
+        panel.setController(this);
+        panel.setupAndDisplay();
 //end of modifiable zone..................E/d175dac0-8632-4105-b164-1e61a802d9c3
     }
 

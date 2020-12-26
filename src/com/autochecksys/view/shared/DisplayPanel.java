@@ -36,9 +36,9 @@ public abstract class DisplayPanel extends JPanel {
     public abstract void update(KeyValuePair change);
 
     public void setController(AbstractController controller) {
-//begin of modifiable zone(JavaCode)......C/b752f754-8985-4cb0-9b0f-71152ac1d5d6
+//begin of modifiable zone................T/895cb13f-5129-4041-ac66-d235704eeb24
         this.controller = controller;
-//end of modifiable zone(JavaCode)........E/b752f754-8985-4cb0-9b0f-71152ac1d5d6
+//end of modifiable zone..................E/895cb13f-5129-4041-ac66-d235704eeb24
     }
 
 }

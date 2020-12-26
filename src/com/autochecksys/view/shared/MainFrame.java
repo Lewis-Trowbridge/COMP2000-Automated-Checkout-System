@@ -22,13 +22,11 @@ pack();
 
     public void displayPanel(DisplayPanel panelToDisplay) {
 //begin of modifiable zone................T/46aa3c1e-d34e-44eb-beba-7646c87eec74
-        GridBagConstraints panelConstraints = new GridBagConstraints();
-        panelConstraints.gridx = 0;
-        panelConstraints.gridy = 0;
-        panelConstraints.weightx = 1;
-        panelConstraints.weighty = 1;
+        GridBagConstraintsBuilder builder = new GridBagConstraintsBuilder();
         topLevelPanel.removeAll();
-        topLevelPanel.add(panelToDisplay, panelConstraints);
+        GridBagConstraints constraints = builder.setFill(GridBagConstraints.BOTH).build();
+        topLevelPanel.add(panelToDisplay, constraints);
+        validate();
         pack();
 //end of modifiable zone..................E/46aa3c1e-d34e-44eb-beba-7646c87eec74
     }

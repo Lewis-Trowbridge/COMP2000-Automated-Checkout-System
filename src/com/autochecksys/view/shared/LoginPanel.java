@@ -24,6 +24,7 @@ public class LoginPanel extends DisplayPanel {
 
     public JButton btnGoToCheckout;
 
+    @Override
     protected void setUpComponents() {
 //begin of modifiable zone................T/2459f603-8f00-4ce1-9791-7e89ff42841a
         // Set up grid layout manager on this panel
