@@ -34,7 +34,7 @@ public class StockFileWatcherTest {
             Thread.sleep(2000);
             String testString = "[{\"itemId\":1,\"itemName\":\"Jam\",\"itemPrice\":0.99,\"stockCount\":30}]";
             StockFileAccess.getInstance().write(testString);
-            assertEquals(stockItems, Repository.getRepositoryInstance().stockItems);
+            assertEquals(stockItems.get(0), Repository.getRepositoryInstance().stockItems.get(0));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -1,15 +1,11 @@
 package com.autochecksys.dbaccess;
 
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class StockFileAccess implements IFileAccess {
     private static StockFileAccess instance;
 
-    @Override
     public synchronized String read() {
 //begin of modifiable zone(JavaCode)......C/cf678d81-e7bd-487d-9c8f-c00c7a5b2c49
 
@@ -28,10 +24,8 @@ public class StockFileAccess implements IFileAccess {
     }
 //end of modifiable zone..................E/a6513b9b-46a5-4c8c-a7c0-8f16473cc6eb
 
-
-    @Override
     public synchronized void write(String newContent) {
-//begin of modifiable zone................T/e7e9acb2-40e1-47aa-bfdc-bd0e07e4c957
+//begin of modifiable zone(JavaCode)......C/02427273-e11c-4c08-a0de-38f6ea53f916
         File stockFile = new File("./resources/stock.json");
         try {
             FileWriter writer = new FileWriter(stockFile);
@@ -40,7 +34,7 @@ public class StockFileAccess implements IFileAccess {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//end of modifiable zone..................E/e7e9acb2-40e1-47aa-bfdc-bd0e07e4c957
+//end of modifiable zone(JavaCode)........E/02427273-e11c-4c08-a0de-38f6ea53f916
     }
 
     private StockFileAccess() {

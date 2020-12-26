@@ -83,7 +83,7 @@ public class StockItem implements IAutoCheckSysModel {
         
         StockItem newItem = (StockItem) o;
         
-        return this.itemId == newItem.itemId && this.itemName.equals(newItem.itemName) && this.itemPrice == newItem.itemPrice;
+        return this.itemId == newItem.itemId && this.itemName.equals(newItem.itemName) && this.itemPrice == newItem.itemPrice && this.stockCount == newItem.stockCount;
 //end of modifiable zone..................E/92d5ed13-e8ab-4bab-9f84-703555ba5fbd
 //begin of modifiable zone(JavaReturned)..C/40652c1c-6683-41ec-be34-b9c80d8f4113
 
