@@ -4,6 +4,8 @@ import java.awt.*;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import com.autochecksys.KeyValuePair;
+import com.autochecksys.controller.shared.AbstractLoginController;
 
 public class LoginPanel extends DisplayPanel {
     public JLabel lblWelcome;
@@ -20,7 +22,6 @@ public class LoginPanel extends DisplayPanel {
 
     public JButton btnGoToCheckout;
 
-    @Override
     protected void setUpComponents() {
 //begin of modifiable zone................T/2459f603-8f00-4ce1-9791-7e89ff42841a
         // Set up grid layout manager on this panel
@@ -40,8 +41,8 @@ public class LoginPanel extends DisplayPanel {
         GridBagConstraints btnLoginConstraints = builder.setGridX(2).setGridY(1).setGridHeight(2).setFill(GridBagConstraints.CENTER).build();
         btnGoToCheckout = new JButton("Go to checkout");
         GridBagConstraints btnGoToCheckoutConstraints = builder.setGridY(3).setGridHeight(3).setGridWidth(3).setFill(GridBagConstraints.BOTH).build();
-
-
+        
+        
         this.add(lblWelcome, lblWelcomeConstraints);
         this.add(lblUsernameTitle, lblUsernameTitleConstraints);
         this.add(txfUsername, txfUsernameConstraints);
@@ -52,14 +53,19 @@ public class LoginPanel extends DisplayPanel {
 //end of modifiable zone..................E/2459f603-8f00-4ce1-9791-7e89ff42841a
     }
 
-    public LoginPanel(MainFrame frameToDisplayIn) {
+    public LoginPanel(MainFrame frameToDisplayIn, AbstractLoginController controllerToUse) {
 //begin of modifiable zone................T/6ab92638-dda1-422e-a110-47259d475ba3
-        super(frameToDisplayIn);
+super(frameToDisplayIn, controllerToUse);
 
 //end of modifiable zone..................E/6ab92638-dda1-422e-a110-47259d475ba3
 //begin of modifiable zone(JavaCode)......C/dfe42758-3f75-43bf-9603-fa1768808e74
-
 //end of modifiable zone(JavaCode)........E/dfe42758-3f75-43bf-9603-fa1768808e74
+    }
+
+    public void update(KeyValuePair change) {
+//begin of modifiable zone................T/5f8eb331-cfd8-41cc-9ef2-de4b19313d77
+        // Since we don't presently need to reflect any changes on screen, this method do not need to do anything for now
+//end of modifiable zone..................E/5f8eb331-cfd8-41cc-9ef2-de4b19313d77
     }
 
 }

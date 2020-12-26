@@ -1,16 +1,21 @@
 package com.autochecksys.gui.shared;
 
 import javax.swing.JPanel;
+import com.autochecksys.KeyValuePair;
+import com.autochecksys.controller.shared.AbstractController;
 
 public abstract class DisplayPanel extends JPanel {
+    public AbstractController controller;
+
     public MainFrame mainFrameToUse;
 
-    public DisplayPanel(MainFrame frameToDisplayIn) {
+    public DisplayPanel(MainFrame frameToDisplayIn, AbstractController controllerToUse) {
 //begin of modifiable zone(JavaSuper).....C/91cfef97-d38e-4483-b34e-2f3628e871b5
 
 //end of modifiable zone(JavaSuper).......E/91cfef97-d38e-4483-b34e-2f3628e871b5
 //begin of modifiable zone................T/3a482217-5049-4e7e-96d3-fbf859f563f8
         this.mainFrameToUse = frameToDisplayIn;
+        this.controller = controllerToUse;
 //end of modifiable zone..................E/3a482217-5049-4e7e-96d3-fbf859f563f8
     }
 
@@ -23,10 +28,12 @@ public abstract class DisplayPanel extends JPanel {
     }
 
     public void setupAndDisplay() {
-//begin of modifiable zone(JavaCode)......C/808f9c52-0b5b-4f09-8ad5-fce3c1be7d76
+//begin of modifiable zone................T/4b7cca5f-beff-47f1-adb6-711be99195c3
         setUpComponents();
         display();
-//end of modifiable zone(JavaCode)........E/808f9c52-0b5b-4f09-8ad5-fce3c1be7d76
+//end of modifiable zone..................E/4b7cca5f-beff-47f1-adb6-711be99195c3
     }
+
+    public abstract void update(KeyValuePair change);
 
 }
