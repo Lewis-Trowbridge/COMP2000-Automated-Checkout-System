@@ -1,4 +1,4 @@
-package com.autochecksys.dbaccess;
+package com.autochecksys.model;
 
 import org.junit.After;
 import org.junit.Before;

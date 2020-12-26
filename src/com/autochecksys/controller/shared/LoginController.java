@@ -1,14 +1,15 @@
 package com.autochecksys.controller.shared;
 
 import com.autochecksys.KeyValuePair;
-import com.autochecksys.dbaccess.IAutoCheckSysModel;
-import com.autochecksys.gui.shared.DisplayPanel;
+import com.autochecksys.model.IAutoCheckSysModel;
+import com.autochecksys.view.shared.DisplayPanel;
 
 public class LoginController extends AbstractLoginController {
     public DisplayPanel viewToControl;
 
     public IAutoCheckSysModel[] modelsToUse;
 
+    @Override
     public boolean checkLogin(String username, String password) {
 //begin of modifiable zone(JavaCode)......C/f0fdcaff-94a2-414f-8219-bc1845b932a6
 
@@ -18,6 +19,7 @@ public class LoginController extends AbstractLoginController {
 //end of modifiable zone(JavaReturned)....E/f0fdcaff-94a2-414f-8219-bc1845b932a6
     }
 
+    @Override
     public void updateView(KeyValuePair change) {
 //begin of modifiable zone(JavaCode)......C/63373f6d-f0bf-4768-af4a-3e3cd500d1ef
 

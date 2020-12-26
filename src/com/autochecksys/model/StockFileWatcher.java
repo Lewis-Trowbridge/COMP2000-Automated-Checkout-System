@@ -1,4 +1,4 @@
-package com.autochecksys.dbaccess;
+package com.autochecksys.model;
 
 public class StockFileWatcher implements IJsonFileWatcher, Runnable {
     private String currentContent;

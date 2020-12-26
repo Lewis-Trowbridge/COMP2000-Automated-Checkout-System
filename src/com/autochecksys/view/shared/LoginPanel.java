@@ -1,4 +1,4 @@
-package com.autochecksys.gui.shared;
+package com.autochecksys.view.shared;
 
 import java.awt.*;
 import javax.swing.JButton;
@@ -22,6 +22,7 @@ public class LoginPanel extends DisplayPanel {
 
     public JButton btnGoToCheckout;
 
+    @Override
     protected void setUpComponents() {
 //begin of modifiable zone................T/2459f603-8f00-4ce1-9791-7e89ff42841a
         // Set up grid layout manager on this panel
@@ -62,6 +63,7 @@ super(frameToDisplayIn, controllerToUse);
 //end of modifiable zone(JavaCode)........E/dfe42758-3f75-43bf-9603-fa1768808e74
     }
 
+    @Override
     public void update(KeyValuePair change) {
 //begin of modifiable zone................T/5f8eb331-cfd8-41cc-9ef2-de4b19313d77
         // Since we don't presently need to reflect any changes on screen, this method do not need to do anything for now

@@ -1,4 +1,4 @@
-package com.autochecksys.gui.shared;
+package com.autochecksys.view.shared;
 
 import javax.swing.JPanel;
 import com.autochecksys.KeyValuePair;

@@ -1,4 +1,4 @@
-package com.autochecksys.dbaccess;
+package com.autochecksys.model;
 
 import com.autochecksys.KeyValuePair;
 import com.autochecksys.controller.shared.AbstractController;

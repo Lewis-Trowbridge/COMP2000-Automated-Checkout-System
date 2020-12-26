@@ -1,4 +1,4 @@
-package com.autochecksys.dbaccess;
+package com.autochecksys.model;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.autochecksys.gui.shared;
+package com.autochecksys.view.shared;
 
 import java.awt.*;
 import javax.swing.JFrame;
