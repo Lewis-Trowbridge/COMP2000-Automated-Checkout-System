@@ -1,15 +1,21 @@
 package com.autochecksys.dbaccess;
 
+import java.util.ArrayList;
+import java.util.List;
+import com.autochecksys.KeyValuePair;
+import com.autochecksys.controller.shared.AbstractController;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class StockItem {
+public class StockItem implements IAutoCheckSysModel {
     private int itemId;
 
     private String itemName;
 
     private float itemPrice;
 
-    public int stockCount;
+    private int stockCount;
+
+    public List<AbstractController> observers = new ArrayList<AbstractController> ();
 
     @JsonProperty("itemPrice")
     float getItemPrice() {
@@ -64,6 +70,26 @@ public class StockItem {
 //end of modifiable zone..................E/0d907bba-e152-4fd7-80b8-83378bb20dff
     }
 
+    @Override
+    public boolean equals(Object o) {
+//begin of modifiable zone................T/92d5ed13-e8ab-4bab-9f84-703555ba5fbd
+        if (o == this) {
+            return true;
+        }
+        
+        if (!(o instanceof StockItem)) {
+            return false;
+        }
+        
+        StockItem newItem = (StockItem) o;
+        
+        return this.itemId == newItem.itemId && this.itemName.equals(newItem.itemName) && this.itemPrice == newItem.itemPrice;
+//end of modifiable zone..................E/92d5ed13-e8ab-4bab-9f84-703555ba5fbd
+//begin of modifiable zone(JavaReturned)..C/40652c1c-6683-41ec-be34-b9c80d8f4113
+
+//end of modifiable zone(JavaReturned)....E/40652c1c-6683-41ec-be34-b9c80d8f4113
+    }
+
     @JsonProperty("stockCount")
     int getStockCount() {
 //begin of modifiable zone................T/a748ca34-0e00-4529-a5ff-5f3e7a150a3a
@@ -81,23 +107,24 @@ public class StockItem {
 //end of modifiable zone..................E/8dfaafaa-b828-4297-a049-a4d1f4e15b81
     }
 
-    @Override
-    public boolean equals(Object o) {
-//begin of modifiable zone................T/92d5ed13-e8ab-4bab-9f84-703555ba5fbd
-        if (o == this) {
-            return true;
-        }
-
-        if (!(o instanceof StockItem)) {
-            return false;
-        }
-
-        StockItem newItem = (StockItem) o;
-
-        return this.itemId == newItem.itemId && this.itemName.equals(newItem.itemName) && this.itemPrice == newItem.itemPrice;
-//end of modifiable zone..................E/92d5ed13-e8ab-4bab-9f84-703555ba5fbd
-//begin of modifiable zone(JavaReturned)..C/40652c1c-6683-41ec-be34-b9c80d8f4113
-
-//end of modifiable zone(JavaReturned)....E/40652c1c-6683-41ec-be34-b9c80d8f4113
+    public void add(AbstractController observer) {
+//begin of modifiable zone(JavaCode)......C/5818134a-0968-4028-ae00-15c853a70742
+        this.observers.add(observer);
+//end of modifiable zone(JavaCode)........E/5818134a-0968-4028-ae00-15c853a70742
     }
+
+    public void remove(AbstractController observer) {
+//begin of modifiable zone(JavaCode)......C/04a82c74-2d0c-4484-8fee-031029e9b0a7
+        this.observers.remove(observer);
+//end of modifiable zone(JavaCode)........E/04a82c74-2d0c-4484-8fee-031029e9b0a7
+    }
+
+    public void onPropertyChanged(KeyValuePair change) {
+//begin of modifiable zone(JavaCode)......C/94e41433-1a03-4f24-aeba-830d74cd06c3
+        for (AbstractController observer: observers){
+            observer.updateView(change);
+        }
+//end of modifiable zone(JavaCode)........E/94e41433-1a03-4f24-aeba-830d74cd06c3
+    }
+
 }
