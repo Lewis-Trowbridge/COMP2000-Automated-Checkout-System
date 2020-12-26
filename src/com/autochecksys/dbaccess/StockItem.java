@@ -29,9 +29,9 @@ public class StockItem implements IAutoCheckSysModel {
 
     void setItemPrice(float value) {
 //begin of modifiable zone................T/9a23d36d-71b6-4fb6-ba24-d9d077e42980
-        // Automatically generated method. Please delete this comment before entering specific code.
         if (value > 0) {
             this.itemPrice = value;
+            onPropertyChanged(new KeyValuePair(AbstractController.ITEM_PRICE, value));
         }
 //end of modifiable zone..................E/9a23d36d-71b6-4fb6-ba24-d9d077e42980
     }
@@ -48,8 +48,8 @@ public class StockItem implements IAutoCheckSysModel {
 
     void setItemId(int value) {
 //begin of modifiable zone................T/308c68c8-047f-41a7-83c1-ab943b1e8d50
-        // Automatically generated method. Please delete this comment before entering specific code.
         this.itemId = value;
+        onPropertyChanged(new KeyValuePair(AbstractController.ITEM_ID, value));
 //end of modifiable zone..................E/308c68c8-047f-41a7-83c1-ab943b1e8d50
     }
 
@@ -65,8 +65,8 @@ public class StockItem implements IAutoCheckSysModel {
 
     void setItemName(String value) {
 //begin of modifiable zone................T/0d907bba-e152-4fd7-80b8-83378bb20dff
-        // Automatically generated method. Please delete this comment before entering specific code.
         this.itemName = value;
+        onPropertyChanged(new KeyValuePair(AbstractController.ITEM_NAME, value));
 //end of modifiable zone..................E/0d907bba-e152-4fd7-80b8-83378bb20dff
     }
 
@@ -102,8 +102,8 @@ public class StockItem implements IAutoCheckSysModel {
 
     void setStockCount(int value) {
 //begin of modifiable zone................T/8dfaafaa-b828-4297-a049-a4d1f4e15b81
-        // Automatically generated method. Please delete this comment before entering specific code.
         this.stockCount = value;
+        this.onPropertyChanged(new KeyValuePair(AbstractController.STOCK_COUNT, value));
 //end of modifiable zone..................E/8dfaafaa-b828-4297-a049-a4d1f4e15b81
     }
 
