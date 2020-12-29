@@ -1,10 +1,14 @@
 package com.autochecksys.view.kiosk;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.lang.reflect.InvocationTargetException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import com.autochecksys.KeyValuePair;
+import com.autochecksys.model.StockItem;
 import com.autochecksys.view.shared.DisplayPanel;
 import com.autochecksys.view.shared.GridBagConstraintsBuilder;
 import com.autochecksys.view.shared.MainFrame;
@@ -42,13 +46,33 @@ super(mainFrameToUse);
         this.add(lblKiosk, lblKioskConstraints);
         this.add(txfBarcodeInput, txfBarcodeInputConstraints);
         this.add(btnBarcodeEnter, btnBarcodeEnterConstraints);
+
+        setUpEventListeners();
 //end of modifiable zone..................E/32ed2544-31bb-4081-86f0-64ff77155ffc
     }
 
     public void update(KeyValuePair change) {
-//begin of modifiable zone(JavaCode)......C/c7c701c6-307c-4400-a10b-4cf1cd2ed4f5
+//begin of modifiable zone................T/9ccc00b1-27d7-43e3-974f-75ee359c3836
+        switch (change.key) {
+            case "StockItem":
+                System.out.println((StockItem)change.value);
+        }
+//end of modifiable zone..................E/9ccc00b1-27d7-43e3-974f-75ee359c3836
+    }
 
-//end of modifiable zone(JavaCode)........E/c7c701c6-307c-4400-a10b-4cf1cd2ed4f5
+    private void setUpEventListeners() {
+//begin of modifiable zone(JavaCode)......C/5bda2def-b41b-4fee-bdd0-5dd04423d1a0
+        btnBarcodeEnter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controller.getClass().getDeclaredMethod("scanItem", Integer.TYPE).invoke(controller, Integer.parseInt(txfBarcodeInput.getText()));
+                } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException illegalAccessException) {
+                    illegalAccessException.printStackTrace();
+                }
+            }
+        });
+//end of modifiable zone(JavaCode)........E/5bda2def-b41b-4fee-bdd0-5dd04423d1a0
     }
 
 }

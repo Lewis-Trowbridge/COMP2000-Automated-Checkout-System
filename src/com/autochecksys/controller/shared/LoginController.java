@@ -2,6 +2,7 @@ package com.autochecksys.controller.shared;
 
 import java.util.List;
 import com.autochecksys.KeyValuePair;
+import com.autochecksys.controller.kiosk.KioskController;
 import com.autochecksys.model.IAutoCheckSysModel;
 import com.autochecksys.view.kiosk.KioskPanel;
 import com.autochecksys.view.shared.DisplayPanel;
@@ -35,9 +36,9 @@ public class LoginController extends AbstractLoginController {
     public void checkoutButtonClicked() {
 //begin of modifiable zone................T/d175dac0-8632-4105-b164-1e61a802d9c3
         KioskPanel panel = new KioskPanel(viewToControl.mainFrameToUse);
-        // TODO: Replace with creation of new KioskController once it exists
-        panel.setController(this);
+        panel.setController(new KioskController(panel));
         panel.setupAndDisplay();
+
 //end of modifiable zone..................E/d175dac0-8632-4105-b164-1e61a802d9c3
     }
 

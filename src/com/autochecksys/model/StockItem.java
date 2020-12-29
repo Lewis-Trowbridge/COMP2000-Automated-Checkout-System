@@ -37,7 +37,7 @@ public class StockItem implements IAutoCheckSysModel {
     }
 
     @JsonProperty("itemId")
-    int getItemId() {
+    public int getItemId() {
 //begin of modifiable zone................T/15287f22-1fc1-4a62-8978-66df649fa04d
         // Automatically generated method. Please delete this comment before entering specific code.
 //end of modifiable zone..................E/15287f22-1fc1-4a62-8978-66df649fa04d
