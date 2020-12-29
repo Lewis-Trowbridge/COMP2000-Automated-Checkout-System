@@ -18,7 +18,7 @@ public class StockItem implements IAutoCheckSysModel {
     public List<AbstractController> observers = new ArrayList<AbstractController> ();
 
     @JsonProperty("itemPrice")
-    float getItemPrice() {
+    public float getItemPrice() {
 //begin of modifiable zone................T/50f71d57-5e73-4879-9391-f426287cd6a0
         // Automatically generated method. Please delete this comment before entering specific code.
 //end of modifiable zone..................E/50f71d57-5e73-4879-9391-f426287cd6a0
@@ -27,7 +27,7 @@ public class StockItem implements IAutoCheckSysModel {
 //end of modifiable zone..................E/5217e20a-7928-4169-98d5-bd488867b098
     }
 
-    void setItemPrice(float value) {
+    public void setItemPrice(float value) {
 //begin of modifiable zone................T/9a23d36d-71b6-4fb6-ba24-d9d077e42980
         if (value > 0) {
             this.itemPrice = value;
@@ -46,7 +46,7 @@ public class StockItem implements IAutoCheckSysModel {
 //end of modifiable zone..................E/f55cfb78-539a-4f38-ac3f-0a030c856abf
     }
 
-    void setItemId(int value) {
+    public void setItemId(int value) {
 //begin of modifiable zone................T/308c68c8-047f-41a7-83c1-ab943b1e8d50
         this.itemId = value;
         onPropertyChanged(new KeyValuePair(AbstractController.ITEM_ID, value));
@@ -54,7 +54,7 @@ public class StockItem implements IAutoCheckSysModel {
     }
 
     @JsonProperty("itemName")
-    String getItemName() {
+    public String getItemName() {
 //begin of modifiable zone................T/5e73a64b-ca3e-4116-8450-7a9e152b006c
         // Automatically generated method. Please delete this comment before entering specific code.
 //end of modifiable zone..................E/5e73a64b-ca3e-4116-8450-7a9e152b006c
@@ -63,7 +63,7 @@ public class StockItem implements IAutoCheckSysModel {
 //end of modifiable zone..................E/68567535-eb11-4283-bb5f-6346c334d0e8
     }
 
-    void setItemName(String value) {
+    public void setItemName(String value) {
 //begin of modifiable zone................T/0d907bba-e152-4fd7-80b8-83378bb20dff
         this.itemName = value;
         onPropertyChanged(new KeyValuePair(AbstractController.ITEM_NAME, value));
@@ -91,7 +91,7 @@ public class StockItem implements IAutoCheckSysModel {
     }
 
     @JsonProperty("stockCount")
-    int getStockCount() {
+    public int getStockCount() {
 //begin of modifiable zone................T/a748ca34-0e00-4529-a5ff-5f3e7a150a3a
         // Automatically generated method. Please delete this comment before entering specific code.
 //end of modifiable zone..................E/a748ca34-0e00-4529-a5ff-5f3e7a150a3a
@@ -100,7 +100,7 @@ public class StockItem implements IAutoCheckSysModel {
 //end of modifiable zone..................E/a23f406d-28fd-471d-ba92-24371b1be56f
     }
 
-    void setStockCount(int value) {
+    public void setStockCount(int value) {
 //begin of modifiable zone................T/8dfaafaa-b828-4297-a049-a4d1f4e15b81
         this.stockCount = value;
         this.onPropertyChanged(new KeyValuePair(AbstractController.STOCK_COUNT, value));
@@ -108,23 +108,23 @@ public class StockItem implements IAutoCheckSysModel {
     }
 
     public void add(AbstractController observer) {
-//begin of modifiable zone(JavaCode)......C/5818134a-0968-4028-ae00-15c853a70742
+//begin of modifiable zone................T/daf05121-31db-4dc2-b8a2-5277eb3fd925
         this.observers.add(observer);
-//end of modifiable zone(JavaCode)........E/5818134a-0968-4028-ae00-15c853a70742
+//end of modifiable zone..................E/daf05121-31db-4dc2-b8a2-5277eb3fd925
     }
 
     public void remove(AbstractController observer) {
-//begin of modifiable zone(JavaCode)......C/04a82c74-2d0c-4484-8fee-031029e9b0a7
+//begin of modifiable zone................T/b06efcb0-6128-4be0-a9f9-729662829c67
         this.observers.remove(observer);
-//end of modifiable zone(JavaCode)........E/04a82c74-2d0c-4484-8fee-031029e9b0a7
+//end of modifiable zone..................E/b06efcb0-6128-4be0-a9f9-729662829c67
     }
 
     public void onPropertyChanged(KeyValuePair change) {
-//begin of modifiable zone(JavaCode)......C/94e41433-1a03-4f24-aeba-830d74cd06c3
+//begin of modifiable zone................T/2e01f9dd-d3e3-46c1-84d2-d1688f7c4c91
         for (AbstractController observer: observers){
             observer.updateView(change);
         }
-//end of modifiable zone(JavaCode)........E/94e41433-1a03-4f24-aeba-830d74cd06c3
+//end of modifiable zone..................E/2e01f9dd-d3e3-46c1-84d2-d1688f7c4c91
     }
 
 }
