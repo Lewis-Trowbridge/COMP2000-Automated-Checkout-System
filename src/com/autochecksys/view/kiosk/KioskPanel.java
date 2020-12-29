@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
 import com.autochecksys.KeyValuePair;
 import com.autochecksys.model.StockItem;
 import com.autochecksys.view.shared.DisplayPanel;
@@ -41,9 +43,8 @@ super(mainFrameToUse);
 //begin of modifiable zone................T/32ed2544-31bb-4081-86f0-64ff77155ffc
         this.setLayout(new GridBagLayout());
         GridBagConstraintsBuilder builder = new GridBagConstraintsBuilder();
-        String[] columns = {"Item", "Price"};
-        String[][] data = {};
-        tblItemDisplay = new JTable(data, columns);
+        Object[] columns = {"Item", "Price"};
+        tblItemDisplay = new JTable(new DefaultTableModel(columns, 0));
         srpTablePanel = new JScrollPane(tblItemDisplay);
         GridBagConstraints srpTablePanelConstraints = builder.setGridWidth(4).setFill(GridBagConstraints.BOTH).build();
         txfBarcodeInput = new JTextField();
@@ -63,7 +64,9 @@ super(mainFrameToUse);
 //begin of modifiable zone................T/9ccc00b1-27d7-43e3-974f-75ee359c3836
         switch (change.key) {
             case "StockItem":
-                System.out.println((StockItem)change.value);
+                StockItem newItem = (StockItem)change.value;
+                DefaultTableModel model = (DefaultTableModel) tblItemDisplay.getModel();
+                model.addRow(new String[] {newItem.getItemName(), Float.toString(newItem.getItemPrice())});
         }
 //end of modifiable zone..................E/9ccc00b1-27d7-43e3-974f-75ee359c3836
     }
