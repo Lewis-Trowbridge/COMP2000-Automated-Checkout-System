@@ -1,8 +1,13 @@
 package com.autochecksys.model;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
@@ -12,12 +17,15 @@ public class Repository {
 
     private final ObjectMapper mapper;
 
-    public List<StockItem> stockItems = new ArrayList<StockItem> ();
+    public Map<Integer, StockItem> stockItems = new HashMap<Integer, StockItem> ();
 
     private Repository() {
 //begin of modifiable zone................T/97abe80b-b10a-4b04-927e-85c05783e1f6
 mapper = new ObjectMapper();
 populateStock(StockFileAccess.getInstance().read());
+Thread watcherThread = new Thread(new StockFileWatcher(), "Stock file watcher");
+watcherThread.setDaemon(true);
+watcherThread.start();
 
 //end of modifiable zone..................E/97abe80b-b10a-4b04-927e-85c05783e1f6
 //begin of modifiable zone(JavaCode)......C/190b61f6-ae29-4a9a-9053-baf0f262fe57
@@ -39,9 +47,12 @@ populateStock(StockFileAccess.getInstance().read());
 
     public void updateStock(String newJsonString) {
 //begin of modifiable zone................T/30b94964-74bc-44c1-a7d4-c27667a8e127
-        ObjectReader reader = mapper.readerForUpdating(stockItems);
         try {
-            reader.readValue(newJsonString);
+            // Use factory, as this is the only way to also include a TypeReference to deserialise into
+            // a StockItem, not a LinkedHashMap
+            JsonFactory fact = new JsonFactory();
+            ObjectReader reader = mapper.readerForUpdating(stockItems);
+            stockItems = reader.readValue(fact.createParser(newJsonString), new TypeReference<HashMap<Integer, StockItem>>() { });
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -49,13 +60,13 @@ populateStock(StockFileAccess.getInstance().read());
     }
 
     public void populateStock(String newJsonString) {
-//begin of modifiable zone(JavaCode)......C/3df696fb-e145-4493-9e08-4c6f9551d2bd
+//begin of modifiable zone................T/f826a418-edad-4c90-9e04-cc8f0fdeb44e
         try {
-            stockItems = mapper.readValue(newJsonString, new TypeReference<List<StockItem>>() { });
+            stockItems = mapper.readValue(newJsonString, new TypeReference<HashMap<Integer, StockItem>>() { });
         } catch (IOException e) {
             e.printStackTrace(System.out);
         }
-//end of modifiable zone(JavaCode)........E/3df696fb-e145-4493-9e08-4c6f9551d2bd
+//end of modifiable zone..................E/f826a418-edad-4c90-9e04-cc8f0fdeb44e
     }
 
 }
