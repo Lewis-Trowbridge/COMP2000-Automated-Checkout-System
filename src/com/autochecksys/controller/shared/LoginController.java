@@ -1,6 +1,5 @@
 package com.autochecksys.controller.shared;
 
-import java.util.List;
 import com.autochecksys.KeyValuePair;
 import com.autochecksys.controller.kiosk.KioskController;
 import com.autochecksys.model.IAutoCheckSysModel;

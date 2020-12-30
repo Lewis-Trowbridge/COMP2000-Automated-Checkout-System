@@ -1,8 +1,9 @@
 package com.autochecksys.view.shared;
 
-import javax.swing.JPanel;
 import com.autochecksys.KeyValuePair;
 import com.autochecksys.controller.shared.AbstractController;
+
+import javax.swing.*;
 
 public abstract class DisplayPanel extends JPanel {
     public AbstractController controller;

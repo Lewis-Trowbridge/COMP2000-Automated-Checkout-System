@@ -1,13 +1,12 @@
 package com.autochecksys.view.shared;
 
+import com.autochecksys.KeyValuePair;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.InvocationTargetException;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import com.autochecksys.KeyValuePair;
 
 public class LoginPanel extends DisplayPanel {
     public JLabel lblWelcome;

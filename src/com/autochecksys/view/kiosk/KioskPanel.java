@@ -1,22 +1,18 @@
 package com.autochecksys.view.kiosk;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.lang.reflect.InvocationTargetException;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
-
 import com.autochecksys.KeyValuePair;
+import com.autochecksys.controller.shared.AbstractController;
 import com.autochecksys.model.StockItem;
 import com.autochecksys.view.shared.DisplayPanel;
 import com.autochecksys.view.shared.GridBagConstraintsBuilder;
 import com.autochecksys.view.shared.MainFrame;
-import com.autochecksys.controller.shared.AbstractController;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.lang.reflect.InvocationTargetException;
 
 public class KioskPanel extends DisplayPanel {
     public JLabel lblKiosk;

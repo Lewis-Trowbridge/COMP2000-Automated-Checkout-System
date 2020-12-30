@@ -1,6 +1,6 @@
 package com.autochecksys.view.shared;
 
-import java.awt.GridBagConstraints;
+import java.awt.*;
 
 public class GridBagConstraintsBuilder {
     private int gridx = 0;

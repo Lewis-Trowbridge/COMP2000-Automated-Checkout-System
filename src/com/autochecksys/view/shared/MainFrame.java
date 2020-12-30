@@ -1,8 +1,7 @@
 package com.autochecksys.view.shared;
 
+import javax.swing.*;
 import java.awt.*;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class MainFrame extends JFrame {
     public JPanel topLevelPanel;

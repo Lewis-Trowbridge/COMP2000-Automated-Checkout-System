@@ -6,8 +6,6 @@ import com.autochecksys.model.IAutoCheckSysModel;
 import com.autochecksys.view.shared.LoginPanel;
 import com.autochecksys.view.shared.MainFrame;
 
-import java.util.ArrayList;
-
 public class Main {
     public static void main(String[] args) {
         MainFrame frame = new MainFrame();
