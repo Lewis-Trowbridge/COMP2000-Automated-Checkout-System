@@ -16,6 +16,7 @@ import com.autochecksys.model.StockItem;
 import com.autochecksys.view.shared.DisplayPanel;
 import com.autochecksys.view.shared.GridBagConstraintsBuilder;
 import com.autochecksys.view.shared.MainFrame;
+import com.autochecksys.controller.shared.AbstractController;
 
 public class KioskPanel extends DisplayPanel {
     public JLabel lblKiosk;
@@ -43,7 +44,7 @@ super(mainFrameToUse);
 //begin of modifiable zone................T/32ed2544-31bb-4081-86f0-64ff77155ffc
         this.setLayout(new GridBagLayout());
         GridBagConstraintsBuilder builder = new GridBagConstraintsBuilder();
-        Object[] columns = {"Item", "Price"};
+        Object[] columns = {"Id", "Item", "Price"};
         tblItemDisplay = new JTable(new DefaultTableModel(columns, 0));
         srpTablePanel = new JScrollPane(tblItemDisplay);
         GridBagConstraints srpTablePanelConstraints = builder.setGridWidth(4).setFill(GridBagConstraints.BOTH).build();
@@ -60,13 +61,28 @@ super(mainFrameToUse);
 //end of modifiable zone..................E/32ed2544-31bb-4081-86f0-64ff77155ffc
     }
 
+    @Override
     public void update(KeyValuePair change) {
 //begin of modifiable zone................T/9ccc00b1-27d7-43e3-974f-75ee359c3836
+        DefaultTableModel model = (DefaultTableModel) tblItemDisplay.getModel();
         switch (change.key) {
             case "StockItem":
                 StockItem newItem = (StockItem)change.value;
-                DefaultTableModel model = (DefaultTableModel) tblItemDisplay.getModel();
-                model.addRow(new String[] {newItem.getItemName(), Float.toString(newItem.getItemPrice())});
+                model.addRow(new String[] {Integer.toString(newItem.getItemId()), newItem.getItemName(), Float.toString(newItem.getItemPrice())});
+                break;
+            case AbstractController.ITEM_NAME:
+                for (int i = 0; i < tblItemDisplay.getRowCount(); i++){
+                    // Get the ID of the current row in string format, as this is how it is displayed
+                    String stringId = (String)model.getValueAt(i, 0);
+                    // Convert the stringId into an integer
+                    int intId = Integer.parseInt(stringId);
+                    // If this row's ID has the same ID as the data we're getting in
+                    if (intId == change.id){
+                        model.setValueAt((String)change.value, i, 1);
+                        model.fireTableCellUpdated(i, 1);
+                    }
+                }
+                break;
         }
 //end of modifiable zone..................E/9ccc00b1-27d7-43e3-974f-75ee359c3836
     }

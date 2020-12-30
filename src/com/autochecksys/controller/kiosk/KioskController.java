@@ -5,9 +5,7 @@ import com.autochecksys.model.IAutoCheckSysModel;
 import com.autochecksys.model.Repository;
 import com.autochecksys.view.shared.DisplayPanel;
 
-import javax.swing.*;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 public class KioskController extends AbstractKioskController {
     public DisplayPanel viewToControl;
@@ -20,7 +18,10 @@ public class KioskController extends AbstractKioskController {
             try {
                 Integer currentModelID = (Integer) model.getClass().getDeclaredMethod("getItemId").invoke(model, null);
                 if (currentModelID == id){
-                    updateView(new KeyValuePair("StockItem", model));
+                    // Add this controller as an observer to this model, as it has now been "scanned"
+                    model.add(this);
+                    // Send back the whole model, since this will be needed by the view
+                    updateView(new KeyValuePair("StockItem", model, -1));
                 }
             } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
@@ -36,15 +37,13 @@ public class KioskController extends AbstractKioskController {
 //begin of modifiable zone(JavaCode)......C/98ee244d-b816-418f-82ce-bd907c4f383f
         this.viewToControl = viewToControl;
         IAutoCheckSysModel[] modelArray = new IAutoCheckSysModel[Repository.getRepositoryInstance().stockItems.size()];
-        this.modelsToUse = Repository.getRepositoryInstance().stockItems.toArray(modelArray);
-        for (IAutoCheckSysModel model: this.modelsToUse){
-            model.add(this);
-        }
+        this.modelsToUse = Repository.getRepositoryInstance().stockItems.values().toArray(modelArray);
 //end of modifiable zone(JavaCode)........E/98ee244d-b816-418f-82ce-bd907c4f383f
     }
 
     public void updateView(KeyValuePair change) {
 //begin of modifiable zone(JavaCode)......C/058022de-1be2-4867-9aa9-e7edf5f2b740
+        // Pass change along to the view
         this.viewToControl.update(change);
 //end of modifiable zone(JavaCode)........E/058022de-1be2-4867-9aa9-e7edf5f2b740
     }
