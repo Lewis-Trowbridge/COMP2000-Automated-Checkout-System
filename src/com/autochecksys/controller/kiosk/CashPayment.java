@@ -2,6 +2,7 @@ package com.autochecksys.controller.kiosk;
 
 
 public class CashPayment implements IPaymentMethod {
+    @Override
     public String pay(float amountToPay) {
 //begin of modifiable zone(JavaCode)......C/e6eca538-ba2c-4054-a105-8d68d0b75f62
 

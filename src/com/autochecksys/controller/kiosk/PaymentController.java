@@ -1,5 +1,7 @@
 package com.autochecksys.controller.kiosk;
 
+import java.util.ArrayList;
+import java.util.List;
 import com.autochecksys.KeyValuePair;
 import com.autochecksys.model.IAutoCheckSysModel;
 import com.autochecksys.view.shared.DisplayPanel;
@@ -7,11 +9,11 @@ import com.autochecksys.view.shared.DisplayPanel;
 public class PaymentController extends AbstractPaymentController {
     public DisplayPanel viewToControl;
 
-    public IAutoCheckSysModel[] basket;
+    public List<IAutoCheckSysModel> basket = new ArrayList<IAutoCheckSysModel> ();
 
     public IPaymentMethod paymentMethod;
 
-    public PaymentController(DisplayPanel viewToControl, IAutoCheckSysModel basket, float totalToPay) {
+    public PaymentController(DisplayPanel viewToControl, List<IAutoCheckSysModel> basket, float totalToPay) {
 //begin of modifiable zone(JavaSuper).....C/2d877c05-6d69-4e9f-b197-42b3b3cbf0c2
 
 //end of modifiable zone(JavaSuper).......E/2d877c05-6d69-4e9f-b197-42b3b3cbf0c2

@@ -6,6 +6,7 @@ import java.util.List;
 import com.autochecksys.KeyValuePair;
 import com.autochecksys.model.IAutoCheckSysModel;
 import com.autochecksys.model.Repository;
+import com.autochecksys.view.kiosk.PaymentPanel;
 import com.autochecksys.view.shared.DisplayPanel;
 
 public class KioskController extends AbstractKioskController {
@@ -65,6 +66,15 @@ public class KioskController extends AbstractKioskController {
 //begin of modifiable zone(JavaCode)......C/9459e6c4-51c8-4180-b3b2-fbfdb94ad89d
 
 //end of modifiable zone(JavaCode)........E/9459e6c4-51c8-4180-b3b2-fbfdb94ad89d
+    }
+
+    public void goToPayment() {
+//begin of modifiable zone(JavaCode)......C/b72f577c-53a1-42f8-990c-23f642de3ce8
+        PaymentPanel panel = new PaymentPanel(viewToControl.mainFrameToUse);
+        PaymentController controller = new PaymentController(panel, this.currentBasket, this.currentTotal);
+        panel.setController(controller);
+        panel.setupAndDisplay();
+//end of modifiable zone(JavaCode)........E/b72f577c-53a1-42f8-990c-23f642de3ce8
     }
 
 }
