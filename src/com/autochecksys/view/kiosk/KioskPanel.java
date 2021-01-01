@@ -40,7 +40,7 @@ super(mainFrameToUse);
 //begin of modifiable zone................T/32ed2544-31bb-4081-86f0-64ff77155ffc
         this.setLayout(new GridBagLayout());
         GridBagConstraintsBuilder builder = new GridBagConstraintsBuilder();
-        Object[] columns = {"Id", "Item", "Price"};
+        Object[] columns = {"ID", "Item", "Price"};
         tblItemDisplay = new JTable(new DefaultTableModel(columns, 0));
         srpTablePanel = new JScrollPane(tblItemDisplay);
         GridBagConstraints srpTablePanelConstraints = builder.setGridWidth(4).setFill(GridBagConstraints.BOTH).build();
@@ -74,8 +74,18 @@ super(mainFrameToUse);
                     int intId = Integer.parseInt(stringId);
                     // If this row's ID has the same ID as the data we're getting in
                     if (intId == change.id){
-                        model.setValueAt((String)change.value, i, 1);
+                        model.setValueAt(change.value, i, 1);
                         model.fireTableCellUpdated(i, 1);
+                    }
+                }
+                break;
+            case AbstractController.ITEM_PRICE:
+                for (int i = 0; i < tblItemDisplay.getRowCount(); i++){
+                    String stringId = (String)model.getValueAt(i, 0);
+                    int intId = Integer.parseInt(stringId);
+                    if (intId == change.id){
+                        model.setValueAt(change.value, i, 2);
+                        model.fireTableCellUpdated(i, 2);
                     }
                 }
                 break;
