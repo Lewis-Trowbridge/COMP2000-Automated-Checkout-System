@@ -55,7 +55,9 @@ super(mainFrameToUse);
         txfBarcodeInput = new JTextField();
         GridBagConstraints txfBarcodeInputConstraints = builder.setGridWidth(3).setFill(GridBagConstraints.HORIZONTAL).build();
         btnBarcodeEnter = new JButton("Go");
-        GridBagConstraints btnBarcodeEnterConstraints = builder.setGridX(4).setFill(GridBagConstraints.HORIZONTAL).build();
+        GridBagConstraints btnBarcodeEnterConstraints = builder.setGridX(4).setWeightX(0).setFill(GridBagConstraints.HORIZONTAL).build();
+        btnGoToPayment = new JButton("Finish and pay");
+        GridBagConstraints btnGoToPaymentConstraints = builder.setGridY(7).setWeightY(0).setFill(GridBagConstraints.HORIZONTAL).build();
         
         
         this.add(srpTablePanel, srpTablePanelConstraints);
@@ -63,7 +65,8 @@ super(mainFrameToUse);
         scanPanel.add(txfBarcodeInput, txfBarcodeInputConstraints);
         scanPanel.add(btnBarcodeEnter, btnBarcodeEnterConstraints);
         this.add(scanPanel, scanPanelConstraints);
-        
+        this.add(btnGoToPayment, btnGoToPaymentConstraints);
+
         setUpEventListeners();
 //end of modifiable zone..................E/32ed2544-31bb-4081-86f0-64ff77155ffc
     }
@@ -113,6 +116,17 @@ super(mainFrameToUse);
             public void actionPerformed(ActionEvent e) {
                 try {
                     controller.getClass().getDeclaredMethod("scanItem", Integer.TYPE).invoke(controller, Integer.parseInt(txfBarcodeInput.getText()));
+                } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException illegalAccessException) {
+                    illegalAccessException.printStackTrace();
+                }
+            }
+        });
+
+        btnGoToPayment.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controller.getClass().getDeclaredMethod("goToPayment").invoke(controller, null);
                 } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException illegalAccessException) {
                     illegalAccessException.printStackTrace();
                 }
