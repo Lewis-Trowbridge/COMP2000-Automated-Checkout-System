@@ -9,7 +9,7 @@ import com.autochecksys.view.shared.DisplayPanel;
 public class PaymentController extends AbstractPaymentController {
     public DisplayPanel viewToControl;
 
-    public List<IAutoCheckSysModel> basket = new ArrayList<IAutoCheckSysModel> ();
+    public List<IAutoCheckSysModel> basket;
 
     public float totalToPay;
 

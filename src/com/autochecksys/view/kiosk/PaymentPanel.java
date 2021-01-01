@@ -1,10 +1,22 @@
 package com.autochecksys.view.kiosk;
 
+import java.awt.*;
+import javax.swing.*;
+
 import com.autochecksys.KeyValuePair;
 import com.autochecksys.view.shared.DisplayPanel;
+import com.autochecksys.view.shared.GridBagConstraintsBuilder;
 import com.autochecksys.view.shared.MainFrame;
 
 public class PaymentPanel extends DisplayPanel {
+    public JLabel lblPaymentTitle;
+
+    public JComboBox<String> cbxPaymentMethodSelection;
+
+    public JTextField txfPriceInput;
+
+    public JButton btnPay;
+
     public PaymentPanel(MainFrame mainFrameToUse) {
 //begin of modifiable zone................T/1b155cef-0ad2-443a-b264-d76f0b150598
 super(mainFrameToUse);
@@ -17,9 +29,32 @@ super(mainFrameToUse);
 
     @Override
     protected void setUpComponents() {
-//begin of modifiable zone(JavaCode)......C/c89531b9-4669-4b7a-b5bb-4b6e56c927b4
+//begin of modifiable zone................T/7b794898-f1b7-465b-af07-c42d5d2542ca
+        this.setLayout(new GridBagLayout());
+        GridBagConstraintsBuilder builder = new GridBagConstraintsBuilder();
+        lblPaymentTitle = new JLabel("Please select your payment method:");
+        GridBagConstraints lblPaymentTitleConstraints = builder.build();
+        
+        String[] paymentOptionStrings = {"Card", "Cash"};
+        cbxPaymentMethodSelection = new JComboBox<>(paymentOptionStrings);
+        GridBagConstraints cbxPaymentMethodSelectionConstraints = builder.setGridY(1).build();
 
-//end of modifiable zone(JavaCode)........E/c89531b9-4669-4b7a-b5bb-4b6e56c927b4
+        JPanel pnlPayControls = new JPanel();
+        pnlPayControls.setLayout(new GridBagLayout());
+        GridBagConstraints pnlPayControlsConstraints = builder.setGridY(2).setFill(GridBagConstraints.HORIZONTAL).build();
+
+        txfPriceInput = new JTextField();
+        GridBagConstraints txfPriceInputConstraints = builder.setFill(GridBagConstraints.HORIZONTAL).build();
+
+        btnPay = new JButton("Pay");
+        GridBagConstraints btnPayConstraints = builder.setGridX(1).setFill(GridBagConstraints.HORIZONTAL).build();
+
+        this.add(lblPaymentTitle, lblPaymentTitleConstraints);
+        this.add(cbxPaymentMethodSelection, cbxPaymentMethodSelectionConstraints);
+        pnlPayControls.add(txfPriceInput, txfPriceInputConstraints);
+        pnlPayControls.add(btnPay, btnPayConstraints);
+        this.add(pnlPayControls, pnlPayControlsConstraints);
+//end of modifiable zone..................E/7b794898-f1b7-465b-af07-c42d5d2542ca
     }
 
     @Override
