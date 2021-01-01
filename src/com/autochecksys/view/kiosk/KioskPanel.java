@@ -75,6 +75,8 @@ super(mainFrameToUse);
                 StockItem newItem = (StockItem)change.value;
                 model.addRow(new String[] {Integer.toString(newItem.getItemId()), newItem.getItemName(), Float.toString(newItem.getItemPrice())});
                 break;
+            case "Total":
+                lblTotalPrice.setText("Current total: £" + String.format("%.2f", (float)change.value));
             case AbstractController.ITEM_NAME:
                 for (int i = 0; i < tblItemDisplay.getRowCount(); i++){
                     // Get the ID of the current row in string format, as this is how it is displayed
