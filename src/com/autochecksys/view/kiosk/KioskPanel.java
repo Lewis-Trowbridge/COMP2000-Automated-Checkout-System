@@ -25,6 +25,8 @@ public class KioskPanel extends DisplayPanel {
 
     public JScrollPane srpTablePanel;
 
+    public JLabel lblTotalPrice;
+
     public KioskPanel(MainFrame mainFrameToUse) {
 //begin of modifiable zone................T/659be782-e128-4838-a1d4-2cacf7025a79
 super(mainFrameToUse);
@@ -43,21 +45,28 @@ super(mainFrameToUse);
         Object[] columns = {"ID", "Item", "Price"};
         tblItemDisplay = new JTable(new DefaultTableModel(columns, 0));
         srpTablePanel = new JScrollPane(tblItemDisplay);
-        GridBagConstraints srpTablePanelConstraints = builder.setGridWidth(4).setFill(GridBagConstraints.BOTH).build();
+        GridBagConstraints srpTablePanelConstraints = builder.setGridHeight(5).setFill(GridBagConstraints.BOTH).build();
+        lblTotalPrice = new JLabel("Current total: £0.00");
+        GridBagConstraints lblTotalPriceConstraints = builder.setGridY(5).setWeightY(0).setFill(GridBagConstraints.HORIZONTAL).build();
+        JPanel scanPanel = new JPanel();
+        scanPanel.setLayout(new GridBagLayout());
+        GridBagConstraints scanPanelConstraints = builder.setGridY(6).setWeightY(0).setFill(GridBagConstraints.HORIZONTAL).build();
         txfBarcodeInput = new JTextField();
-        GridBagConstraints txfBarcodeInputConstraints = builder.setGridY(1).setGridWidth(3).setFill(GridBagConstraints.HORIZONTAL).build();
+        GridBagConstraints txfBarcodeInputConstraints = builder.setGridWidth(3).setFill(GridBagConstraints.HORIZONTAL).build();
         btnBarcodeEnter = new JButton("Go");
-        GridBagConstraints btnBarcodeEnterConstraints = builder.setGridX(3).setGridY(1).setFill(GridBagConstraints.HORIZONTAL).build();
+        GridBagConstraints btnBarcodeEnterConstraints = builder.setGridX(4).setFill(GridBagConstraints.HORIZONTAL).build();
 
-        this.add(txfBarcodeInput, txfBarcodeInputConstraints);
-        this.add(btnBarcodeEnter, btnBarcodeEnterConstraints);
+
         this.add(srpTablePanel, srpTablePanelConstraints);
+        this.add(lblTotalPrice, lblTotalPriceConstraints);
+        scanPanel.add(txfBarcodeInput, txfBarcodeInputConstraints);
+        scanPanel.add(btnBarcodeEnter, btnBarcodeEnterConstraints);
+        this.add(scanPanel, scanPanelConstraints);
         
         setUpEventListeners();
 //end of modifiable zone..................E/32ed2544-31bb-4081-86f0-64ff77155ffc
     }
 
-    @Override
     public void update(KeyValuePair change) {
 //begin of modifiable zone................T/9ccc00b1-27d7-43e3-974f-75ee359c3836
         DefaultTableModel model = (DefaultTableModel) tblItemDisplay.getModel();
