@@ -1,6 +1,6 @@
 package com.autochecksys.view.shared;
 
-import java.awt.*;
+import java.awt.GridBagConstraints;
 
 public class GridBagConstraintsBuilder {
     private int gridx = 0;
@@ -12,6 +12,10 @@ public class GridBagConstraintsBuilder {
     private int gridheight = 1;
 
     private int fill = 0;
+
+    private double weightx = 1;
+
+    private double weighty = 1;
 
     public GridBagConstraints build() {
 //begin of modifiable zone................T/5abb2f1d-03b5-4267-bb97-33a83552fe30
@@ -26,8 +30,10 @@ public class GridBagConstraintsBuilder {
         this.gridheight = 1;
         constraints.fill = this.fill;
         this.fill = 0;
-        constraints.weightx = 1;
-        constraints.weighty = 1;
+        constraints.weightx = weightx;
+        this.weightx = 1;
+        constraints.weighty = weighty;
+        this.weighty = 1;
 //end of modifiable zone..................E/5abb2f1d-03b5-4267-bb97-33a83552fe30
 //begin of modifiable zone................T/8fb678e0-30df-438c-b503-b81243891897
         return constraints;
@@ -77,6 +83,24 @@ public class GridBagConstraintsBuilder {
 //begin of modifiable zone................T/3bbd8591-3c7b-4b1c-87fa-6a8f1d2927af
         return this;
 //end of modifiable zone..................E/3bbd8591-3c7b-4b1c-87fa-6a8f1d2927af
+    }
+
+    public GridBagConstraintsBuilder setWeightX(double value) {
+//begin of modifiable zone(JavaCode)......C/4aa4b474-784f-4c2e-99ee-40c1e5f516d0
+        this.weightx = value;
+//end of modifiable zone(JavaCode)........E/4aa4b474-784f-4c2e-99ee-40c1e5f516d0
+//begin of modifiable zone(JavaReturned)..C/4aa4b474-784f-4c2e-99ee-40c1e5f516d0
+        return this;
+//end of modifiable zone(JavaReturned)....E/4aa4b474-784f-4c2e-99ee-40c1e5f516d0
+    }
+
+    public GridBagConstraintsBuilder setWeightY(double value) {
+//begin of modifiable zone(JavaCode)......C/bd855730-7643-4745-b178-00d2e376dd93
+        this.weighty = value;
+//end of modifiable zone(JavaCode)........E/bd855730-7643-4745-b178-00d2e376dd93
+//begin of modifiable zone(JavaReturned)..C/bd855730-7643-4745-b178-00d2e376dd93
+        return this;
+//end of modifiable zone(JavaReturned)....E/bd855730-7643-4745-b178-00d2e376dd93
     }
 
 }
