@@ -99,4 +99,10 @@ public class KioskControllerTest {
         float expectedTotal = stockMap.get(1).getItemPrice() + stockMap.get(2).getItemPrice();
         assertEquals(expectedTotal, controller.currentTotal, 0);
     }
+
+    @Test
+    public void scanItemAddsToBasket(){
+        controller.scanItem(1);
+        assertEquals(stockMap.get(1), controller.currentBasket.get(0));
+    }
 }

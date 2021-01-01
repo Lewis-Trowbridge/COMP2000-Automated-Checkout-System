@@ -1,11 +1,12 @@
 package com.autochecksys.controller.kiosk;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 import com.autochecksys.KeyValuePair;
 import com.autochecksys.model.IAutoCheckSysModel;
 import com.autochecksys.model.Repository;
 import com.autochecksys.view.shared.DisplayPanel;
-
-import java.lang.reflect.InvocationTargetException;
 
 public class KioskController extends AbstractKioskController {
     public DisplayPanel viewToControl;
@@ -13,6 +14,8 @@ public class KioskController extends AbstractKioskController {
     public IAutoCheckSysModel[] modelsToUse;
 
     public float currentTotal;
+
+    public List<IAutoCheckSysModel> currentBasket = new ArrayList<IAutoCheckSysModel> ();
 
     @Override
     public void scanItem(int id) {
@@ -23,6 +26,8 @@ public class KioskController extends AbstractKioskController {
                 if (currentModelID == id){
                     // Add this controller as an observer to this model, as it has now been "scanned"
                     model.add(this);
+                    // Add this model to the current basket in order to pass forward to the payment screen
+                    currentBasket.add(model);
                     // Send back the whole model, since this will be needed by the view
                     updateView(new KeyValuePair("StockItem", model, -1));
                     currentTotal += (float)model.getClass().getDeclaredMethod("getItemPrice").invoke(model, null);
