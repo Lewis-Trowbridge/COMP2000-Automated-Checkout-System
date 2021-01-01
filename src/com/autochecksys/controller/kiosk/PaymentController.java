@@ -11,15 +11,19 @@ public class PaymentController extends AbstractPaymentController {
 
     public List<IAutoCheckSysModel> basket = new ArrayList<IAutoCheckSysModel> ();
 
+    public float totalToPay;
+
     public IPaymentMethod paymentMethod;
 
     public PaymentController(DisplayPanel viewToControl, List<IAutoCheckSysModel> basket, float totalToPay) {
 //begin of modifiable zone(JavaSuper).....C/2d877c05-6d69-4e9f-b197-42b3b3cbf0c2
 
 //end of modifiable zone(JavaSuper).......E/2d877c05-6d69-4e9f-b197-42b3b3cbf0c2
-//begin of modifiable zone(JavaCode)......C/2d877c05-6d69-4e9f-b197-42b3b3cbf0c2
-
-//end of modifiable zone(JavaCode)........E/2d877c05-6d69-4e9f-b197-42b3b3cbf0c2
+//begin of modifiable zone................T/62a423d6-4d20-4756-a5a2-5ed8d473012c
+        this.viewToControl = viewToControl;
+        this.basket = basket;
+        this.totalToPay = totalToPay;
+//end of modifiable zone..................E/62a423d6-4d20-4756-a5a2-5ed8d473012c
     }
 
     @Override
