@@ -11,6 +11,7 @@ public class StockFileWatcher implements IJsonFileWatcher, Runnable {
 
     public void run() {
 //begin of modifiable zone................T/eb2216a2-29fc-4354-9b1b-027594d28074
+        currentContent = StockFileAccess.getInstance().read();
         while (true) {
             String newlyReadContent = StockFileAccess.getInstance().read();
             if (!newlyReadContent.equals(currentContent)){

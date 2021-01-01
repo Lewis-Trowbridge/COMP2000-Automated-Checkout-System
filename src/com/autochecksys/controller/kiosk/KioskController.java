@@ -14,6 +14,7 @@ public class KioskController extends AbstractKioskController {
 
     public float currentTotal;
 
+    @Override
     public void scanItem(int id) {
 //begin of modifiable zone................T/744f72bc-da00-4c2a-86cd-6979d543f8a5
         for (IAutoCheckSysModel model: this.modelsToUse) {
@@ -46,6 +47,7 @@ public class KioskController extends AbstractKioskController {
 //end of modifiable zone..................E/bf7d9327-e4a5-4266-bb65-b9fdb4e86f73
     }
 
+    @Override
     public void updateView(KeyValuePair change) {
 //begin of modifiable zone................T/e8a74519-7a9b-4bd6-9c96-fb57aaba34e8
         // Pass change along to the view
@@ -53,6 +55,7 @@ public class KioskController extends AbstractKioskController {
 //end of modifiable zone..................E/e8a74519-7a9b-4bd6-9c96-fb57aaba34e8
     }
 
+    @Override
     public void setModelProperty(KeyValuePair change) {
 //begin of modifiable zone(JavaCode)......C/9459e6c4-51c8-4180-b3b2-fbfdb94ad89d
 

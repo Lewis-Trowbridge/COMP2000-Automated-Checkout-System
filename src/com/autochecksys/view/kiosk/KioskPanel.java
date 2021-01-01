@@ -1,18 +1,17 @@
 package com.autochecksys.view.kiosk;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.lang.reflect.InvocationTargetException;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import com.autochecksys.KeyValuePair;
 import com.autochecksys.controller.shared.AbstractController;
 import com.autochecksys.model.StockItem;
 import com.autochecksys.view.shared.DisplayPanel;
 import com.autochecksys.view.shared.GridBagConstraintsBuilder;
 import com.autochecksys.view.shared.MainFrame;
-
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.lang.reflect.InvocationTargetException;
 
 public class KioskPanel extends DisplayPanel {
     public JLabel lblKiosk;
@@ -26,6 +25,8 @@ public class KioskPanel extends DisplayPanel {
     public JScrollPane srpTablePanel;
 
     public JLabel lblTotalPrice;
+
+    public JButton btnGoToPayment;
 
     public KioskPanel(MainFrame mainFrameToUse) {
 //begin of modifiable zone................T/659be782-e128-4838-a1d4-2cacf7025a79
@@ -55,8 +56,8 @@ super(mainFrameToUse);
         GridBagConstraints txfBarcodeInputConstraints = builder.setGridWidth(3).setFill(GridBagConstraints.HORIZONTAL).build();
         btnBarcodeEnter = new JButton("Go");
         GridBagConstraints btnBarcodeEnterConstraints = builder.setGridX(4).setFill(GridBagConstraints.HORIZONTAL).build();
-
-
+        
+        
         this.add(srpTablePanel, srpTablePanelConstraints);
         this.add(lblTotalPrice, lblTotalPriceConstraints);
         scanPanel.add(txfBarcodeInput, txfBarcodeInputConstraints);
@@ -67,6 +68,7 @@ super(mainFrameToUse);
 //end of modifiable zone..................E/32ed2544-31bb-4081-86f0-64ff77155ffc
     }
 
+    @Override
     public void update(KeyValuePair change) {
 //begin of modifiable zone................T/9ccc00b1-27d7-43e3-974f-75ee359c3836
         DefaultTableModel model = (DefaultTableModel) tblItemDisplay.getModel();
