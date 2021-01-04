@@ -32,7 +32,7 @@ public class PaymentControllerTest {
         @Override
         public void update(KeyValuePair change) {
             switch (change.key){
-                case "PaymentInfo":
+                case "PaymentResult":
                     updateResult = change.value;
             }
         }
@@ -67,24 +67,6 @@ public class PaymentControllerTest {
         Object[] paymentInfo = {"0.99"};
         controller.pay("Cash", paymentInfo);
         assertSame(controller.paymentMethod.getClass(), CashPayment.class);
-    }
-
-    @Test
-    public void attemptPayWithCardReturnsAcceptanceMessageFromBank(){
-        Object[] paymentInfo = {"44444"};
-        String expectedMessage = "Message from bank: Payment accepted";
-        controller.pay("Card", paymentInfo);
-        PaymentResult result = (PaymentResult)mockView.updateResult;
-        assertEquals(expectedMessage, result.paymentMessage);
-    }
-
-    @Test
-    public void attemptPayWithCashReturnsExpectedChange(){
-        Object[] paymentInfo = {"2.50"};
-        String expectedMessage = "Payment successful: £0.01 in change";
-        controller.pay("Cash", paymentInfo);
-        PaymentResult result = (PaymentResult)mockView.updateResult;
-        assertEquals(expectedMessage, result.paymentMessage);
     }
 
 

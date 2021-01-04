@@ -1,25 +1,36 @@
 package com.autochecksys.controller.kiosk;
 
 
+import javax.swing.*;
+
 public class CardPayment implements IPaymentMethod {
     private int cardNumber;
 
     @Override
     public PaymentResult pay(float amountToPay) {
-//begin of modifiable zone(JavaCode)......C/50ae07df-07a4-4955-915b-5c8eab14a0ad
-
-//end of modifiable zone(JavaCode)........E/50ae07df-07a4-4955-915b-5c8eab14a0ad
+//begin of modifiable zone................T/5eb8ef6a-1fef-430a-9016-2f886950b63e
+        boolean successful = attemptPayment(amountToPay);
+        PaymentResult result = new PaymentResult();
+        result.paymentSucceeded = successful;
+        if (successful){
+            result.paymentMessage = "Payment approved by bank.";
+        }
+        else {
+            result.paymentMessage = "Payment denied by bank.";
+        }
+//end of modifiable zone..................E/5eb8ef6a-1fef-430a-9016-2f886950b63e
 //begin of modifiable zone................T/384fd863-ef32-42b1-b86a-7afd1cd7289b
-        return new PaymentResult();
+        return result;
 //end of modifiable zone..................E/384fd863-ef32-42b1-b86a-7afd1cd7289b
     }
 
-    private boolean attemptPayment(float amountToPay) {
-//begin of modifiable zone(JavaCode)......C/74c059ca-7a9d-404b-8e3d-6f87a6642ec6
-
-//end of modifiable zone(JavaCode)........E/74c059ca-7a9d-404b-8e3d-6f87a6642ec6
+    protected boolean attemptPayment(float amountToPay) {
+//begin of modifiable zone................T/eaaca554-35c8-47cd-852a-74fb7caa5c77
+        int returned = JOptionPane.showOptionDialog(null, "Card number "+ Integer.toString(cardNumber) + "is attempting to spend £" + String.format("%.2f", amountToPay)
+                + ".\nAccept?", "Bank simulation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+//end of modifiable zone..................E/eaaca554-35c8-47cd-852a-74fb7caa5c77
 //begin of modifiable zone................T/40ac4d4e-fa88-44a4-8449-223a5aeb52ba
-        return false;
+        return returned == JOptionPane.YES_OPTION;
 //end of modifiable zone..................E/40ac4d4e-fa88-44a4-8449-223a5aeb52ba
     }
 
