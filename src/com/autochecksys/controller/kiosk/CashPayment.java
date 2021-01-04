@@ -4,25 +4,23 @@ package com.autochecksys.controller.kiosk;
 public class CashPayment implements IPaymentMethod {
     private float cashGiven;
 
-    private float change;
-
     @Override
     public PaymentResult pay(float amountToPay) {
-//begin of modifiable zone(JavaCode)......C/e6eca538-ba2c-4054-a105-8d68d0b75f62
-
-//end of modifiable zone(JavaCode)........E/e6eca538-ba2c-4054-a105-8d68d0b75f62
+//begin of modifiable zone................T/b9cc6248-7bff-489c-b5f4-db25261cc745
+        PaymentResult result = new PaymentResult();
+        float changeLeft = cashGiven - amountToPay;
+        if (changeLeft >= 0){
+            result.paymentSucceeded = true;
+            result.paymentMessage = "Payment successful: £" + String.format("%.2f", changeLeft) + " in change";
+        }
+        else {
+            result.paymentSucceeded = false;
+            result.paymentMessage = "Payment failed - not enough money presented.";
+        }
+//end of modifiable zone..................E/b9cc6248-7bff-489c-b5f4-db25261cc745
 //begin of modifiable zone................T/e7d8caa4-c3ca-448f-95b6-6cab482c583f
-        return new PaymentResult();
+        return result;
 //end of modifiable zone..................E/e7d8caa4-c3ca-448f-95b6-6cab482c583f
-    }
-
-    private boolean attemptPayment(float amountToPay) {
-//begin of modifiable zone(JavaCode)......C/9b1e928a-fb86-4fdf-83fc-943027f64918
-
-//end of modifiable zone(JavaCode)........E/9b1e928a-fb86-4fdf-83fc-943027f64918
-//begin of modifiable zone................T/a07e0299-f3df-4cda-9fbe-b9f592ce1d0b
-        return false;
-//end of modifiable zone..................E/a07e0299-f3df-4cda-9fbe-b9f592ce1d0b
     }
 
     public CashPayment(float cashGiven) {
