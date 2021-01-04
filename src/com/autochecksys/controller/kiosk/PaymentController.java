@@ -1,6 +1,5 @@
 package com.autochecksys.controller.kiosk;
 
-import java.util.ArrayList;
 import java.util.List;
 import com.autochecksys.KeyValuePair;
 import com.autochecksys.model.IAutoCheckSysModel;
@@ -38,6 +37,15 @@ public class PaymentController extends AbstractPaymentController {
 //begin of modifiable zone(JavaCode)......C/18588d83-a457-4d75-953f-b7a75861e5c1
 
 //end of modifiable zone(JavaCode)........E/18588d83-a457-4d75-953f-b7a75861e5c1
+    }
+
+    public void pay(String paymentMethodIdentifier, Object[] paymentInfo) {
+//begin of modifiable zone(JavaCode)......C/92f3ac49-563c-4927-91f1-7c24d475b166
+        PaymentMethodFactory factory = new PaymentMethodFactory();
+        paymentMethod = factory.createPaymentMethod(paymentMethodIdentifier, paymentInfo);
+        PaymentResult result = paymentMethod.pay(totalToPay);
+
+//end of modifiable zone(JavaCode)........E/92f3ac49-563c-4927-91f1-7c24d475b166
     }
 
 }
