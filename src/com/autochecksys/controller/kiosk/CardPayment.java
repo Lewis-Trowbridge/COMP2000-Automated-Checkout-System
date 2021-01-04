@@ -5,12 +5,12 @@ public class CardPayment implements IPaymentMethod {
     private int cardNumber;
 
     @Override
-    public String pay(float amountToPay) {
+    public PaymentResult pay(float amountToPay) {
 //begin of modifiable zone(JavaCode)......C/50ae07df-07a4-4955-915b-5c8eab14a0ad
 
 //end of modifiable zone(JavaCode)........E/50ae07df-07a4-4955-915b-5c8eab14a0ad
 //begin of modifiable zone................T/384fd863-ef32-42b1-b86a-7afd1cd7289b
-        return "";
+        return new PaymentResult();
 //end of modifiable zone..................E/384fd863-ef32-42b1-b86a-7afd1cd7289b
     }
 
