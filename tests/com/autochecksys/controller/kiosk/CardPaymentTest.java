@@ -24,7 +24,7 @@ public class CardPaymentTest {
 
     @Test
     public void testBankAcceptPayment(){
-        String expectedString = "Payment approved by bank.";
+        String expectedString = "Paid by card.\nPayment approved by bank.";
         CardPayment payment = new MockCardPayment(5555, true);
         PaymentResult result = payment.pay(5.00f);
         assertEquals(expectedString, result.paymentMessage);

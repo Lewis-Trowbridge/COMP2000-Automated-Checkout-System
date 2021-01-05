@@ -11,7 +11,7 @@ public class CashPayment implements IPaymentMethod {
         float changeLeft = cashGiven - amountToPay;
         if (changeLeft >= 0){
             result.paymentSucceeded = true;
-            result.paymentMessage = "Payment successful: £" + String.format("%.2f", changeLeft) + " in change";
+            result.paymentMessage = "Paid by cash.\nPayment successful: £" + String.format("%.2f", changeLeft) + " in change";
         }
         else {
             result.paymentSucceeded = false;

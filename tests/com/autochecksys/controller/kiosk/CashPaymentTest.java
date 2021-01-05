@@ -27,7 +27,7 @@ public class CashPaymentTest {
 
     @Test
     public void successfulPaymentReturnsCorrectMessage(){
-        String expectedMessage = "Payment successful: £4.00 in change";
+        String expectedMessage = "Paid by cash.\nPayment successful: £4.00 in change";
         PaymentResult result = paymentMethod.pay(1.00f);
         assertEquals(expectedMessage, result.paymentMessage);
     }

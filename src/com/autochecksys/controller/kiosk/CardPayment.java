@@ -13,7 +13,7 @@ public class CardPayment implements IPaymentMethod {
         PaymentResult result = new PaymentResult();
         result.paymentSucceeded = successful;
         if (successful){
-            result.paymentMessage = "Payment approved by bank.";
+            result.paymentMessage = "Paid by card.\nPayment approved by bank.";
         }
         else {
             result.paymentMessage = "Payment denied by bank.";
@@ -26,7 +26,7 @@ public class CardPayment implements IPaymentMethod {
 
     protected boolean attemptPayment(float amountToPay) {
 //begin of modifiable zone................T/eaaca554-35c8-47cd-852a-74fb7caa5c77
-        int returned = JOptionPane.showOptionDialog(null, "Card number "+ Integer.toString(cardNumber) + "is attempting to spend £" + String.format("%.2f", amountToPay)
+        int returned = JOptionPane.showOptionDialog(null, "Card number "+ Integer.toString(cardNumber) + " is attempting to spend £" + String.format("%.2f", amountToPay)
                 + ".\nAccept?", "Bank simulation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 //end of modifiable zone..................E/eaaca554-35c8-47cd-852a-74fb7caa5c77
 //begin of modifiable zone................T/40ac4d4e-fa88-44a4-8449-223a5aeb52ba
