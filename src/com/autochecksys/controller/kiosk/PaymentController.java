@@ -1,9 +1,13 @@
 package com.autochecksys.controller.kiosk;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 import com.autochecksys.KeyValuePair;
 import com.autochecksys.model.IAutoCheckSysModel;
 import com.autochecksys.view.shared.DisplayPanel;
+
+import javax.swing.*;
 
 public class PaymentController extends AbstractPaymentController {
     public DisplayPanel viewToControl;
@@ -40,12 +44,34 @@ public class PaymentController extends AbstractPaymentController {
     }
 
     public void pay(String paymentMethodIdentifier, Object[] paymentInfo) {
-//begin of modifiable zone(JavaCode)......C/92f3ac49-563c-4927-91f1-7c24d475b166
+//begin of modifiable zone................T/7cb6a285-71bb-4734-8130-9bfc6059938e
         PaymentMethodFactory factory = new PaymentMethodFactory();
         paymentMethod = factory.createPaymentMethod(paymentMethodIdentifier, paymentInfo);
         PaymentResult result = paymentMethod.pay(totalToPay);
-
-//end of modifiable zone(JavaCode)........E/92f3ac49-563c-4927-91f1-7c24d475b166
+        displayReceipt(result);
+//end of modifiable zone..................E/7cb6a285-71bb-4734-8130-9bfc6059938e
     }
 
+    public void displayReceipt(PaymentResult result) {
+//begin of modifiable zone(JavaCode)......C/f56aea0e-d68b-4b1a-abc8-acdefcafe6a9
+        // Initiate string builder to build entire receipt string
+        StringBuilder receiptString = new StringBuilder();
+        // Iterate through all models in basket and add their names and prices to the receipt string using reflection
+        for (IAutoCheckSysModel model: basket) {
+            try {
+                String name = (String)model.getClass().getDeclaredMethod("getItemName").invoke(model, null);
+                String price = Float.toString((Float)model.getClass().getDeclaredMethod("getItemPrice").invoke(model, null));
+                receiptString.append(name).append("     £").append(price).append("\n");
+            } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+        }
+        // Add total to receipt
+        receiptString.append("Total paid: £").append(String.format("%.2f", totalToPay));
+        // Add payment message - this will contain all relevant information from the payment method
+        receiptString.append(result.paymentMessage).append("\n");
+        // Display in dialog to simulate the printing of a receipt
+        JOptionPane.showMessageDialog(null, receiptString.toString());
+    }
+//end of modifiable zone(JavaCode)........E/f56aea0e-d68b-4b1a-abc8-acdefcafe6a9
 }
