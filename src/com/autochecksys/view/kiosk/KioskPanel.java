@@ -118,6 +118,8 @@ super(mainFrameToUse);
                     controller.getClass().getDeclaredMethod("scanItem", Integer.TYPE).invoke(controller, Integer.parseInt(txfBarcodeInput.getText()));
                 } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException illegalAccessException) {
                     illegalAccessException.printStackTrace();
+                } catch (NumberFormatException ignored) {
+
                 }
             }
         });
