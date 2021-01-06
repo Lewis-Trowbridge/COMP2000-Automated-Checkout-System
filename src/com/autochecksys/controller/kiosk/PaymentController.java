@@ -67,7 +67,7 @@ public class PaymentController extends AbstractPaymentController {
             }
         }
         // Add total to receipt
-        receiptString.append("Total paid: £").append(String.format("%.2f", totalToPay));
+        receiptString.append("Total paid: £").append(String.format("%.2f", totalToPay)).append("\n");
         // Add payment message - this will contain all relevant information from the payment method
         receiptString.append(result.paymentMessage).append("\n");
         // Display in dialog to simulate the printing of a receipt
