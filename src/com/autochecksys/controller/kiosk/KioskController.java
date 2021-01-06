@@ -9,6 +9,8 @@ import com.autochecksys.model.Repository;
 import com.autochecksys.view.kiosk.PaymentPanel;
 import com.autochecksys.view.shared.DisplayPanel;
 
+import javax.swing.*;
+
 public class KioskController extends AbstractKioskController {
     public DisplayPanel viewToControl;
 
@@ -70,11 +72,21 @@ public class KioskController extends AbstractKioskController {
 
     public void goToPayment() {
 //begin of modifiable zone(JavaCode)......C/b72f577c-53a1-42f8-990c-23f642de3ce8
-        PaymentPanel panel = new PaymentPanel(viewToControl.mainFrameToUse);
-        PaymentController controller = new PaymentController(panel, this.currentBasket, this.currentTotal);
-        panel.setController(controller);
-        panel.setupAndDisplay();
-//end of modifiable zone(JavaCode)........E/b72f577c-53a1-42f8-990c-23f642de3ce8
+        // If the basket is not empty, proceed to the payment screen
+        if (!currentBasket.isEmpty()){
+            // Deregister this controller from the model's observers
+            for (IAutoCheckSysModel model: modelsToUse) {
+                model.remove(this);
+            }
+            PaymentPanel panel = new PaymentPanel(viewToControl.mainFrameToUse);
+            PaymentController controller = new PaymentController(panel, this.currentBasket, this.currentTotal);
+            panel.setController(controller);
+            panel.setupAndDisplay();
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Please scan an item.");
+//end of modifiable zone(JavaCode)........E/b72f577c-53a1-42f8-990c-23f642de3ce
+        }
     }
 
 }
