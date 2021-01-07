@@ -14,6 +14,8 @@ public class RepositoryTest {
     HashMap<Integer, StockItem> testStockMap = new HashMap<>();
     StockItem testJam;
     StockItem testBanana;
+    HashMap<String, AdminAccount> testAdminMap = new HashMap<>();
+    AdminAccount testAdmin;
 
     @Before
     public void setUp(){
@@ -28,7 +30,14 @@ public class RepositoryTest {
         testBanana.setItemName("Banana");
         testBanana.setItemPrice(1.47f);
         testBanana.setStockCount(10);
+        // Banana is not in map on purpose to test addition and other methods
         Repository.getRepositoryInstance().stockItems = testStockMap;
+
+        testAdmin = new AdminAccount();
+        testAdmin.setUsername("rsmith");
+        testAdmin.setPassword("unsecure");
+        testAdminMap.put(testAdmin.getUsername(), testAdmin);
+        Repository.getRepositoryInstance().adminAccounts = testAdminMap;
     }
 
     @Test
@@ -84,5 +93,23 @@ public class RepositoryTest {
     public void decrementStockItemWorksCorrectly(){
         Repository.getRepositoryInstance().decrementBoughtItem(1);
         assertEquals(29, Repository.getRepositoryInstance().stockItems.get(1).getStockCount());
+    }
+
+    @Test
+    public void loginWithCorrectCredentialsReturnsTrue(){
+        boolean success = Repository.getRepositoryInstance().login(testAdmin.getUsername(), testAdmin.getPassword());
+        assertTrue(success);
+    }
+
+    @Test
+    public void loginWithIncorrectCredentialsReturnsFalse(){
+        boolean success = Repository.getRepositoryInstance().login("notA", "validLogin");
+        assertFalse(success);
+    }
+
+    @Test
+    public void loginWithIncorrectPasswordReturnsFalse(){
+        boolean success = Repository.getRepositoryInstance().login(testAdmin.getUsername(), "notValid");
+        assertFalse(success);
     }
 }
