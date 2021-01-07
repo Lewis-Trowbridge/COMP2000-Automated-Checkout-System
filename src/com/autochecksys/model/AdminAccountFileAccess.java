@@ -10,10 +10,10 @@ public class AdminAccountFileAccess implements IFileAccess {
     @Override
     public String read() {
 //begin of modifiable zone(JavaCode)......C/fc647aae-6fe1-4f0d-9199-a1a6377e2936
-        File stockFile = new File("./resources/admins.json");
-        char[] contentArray = new char[(int) stockFile.length()];
+        File adminFile = new File("./resources/admins.json");
+        char[] contentArray = new char[(int) adminFile.length()];
         try {
-            FileReader reader = new FileReader(stockFile);
+            FileReader reader = new FileReader(adminFile);
             reader.read(contentArray);
             reader.close();
         } catch (IOException e) {
@@ -29,9 +29,9 @@ public class AdminAccountFileAccess implements IFileAccess {
     @Override
     public void write(String newContent) {
 //begin of modifiable zone(JavaCode)......C/314ac87c-885d-4e2e-958c-815989f8bd5f
-        File stockFile = new File("./resources/admins.json");
+        File adminFile = new File("./resources/admins.json");
         try {
-            FileWriter writer = new FileWriter(stockFile);
+            FileWriter writer = new FileWriter(adminFile);
             writer.write(newContent);
             writer.close();
         } catch (IOException e) {
