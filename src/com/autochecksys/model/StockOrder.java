@@ -89,4 +89,24 @@ public class StockOrder implements IAutoCheckSysModel {
 //end of modifiable zone..................E/fc968a8f-b4b7-44b3-a40a-c9183a997f9c
     }
 
+    @Override
+    public boolean equals(Object o) {
+//begin of modifiable zone(JavaCode)......C/139eaf9b-c8c4-4a12-abe6-45c33a42e40f
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof StockOrder)) {
+            return false;
+        }
+
+        StockOrder newOrder = (StockOrder) o;
+
+        return this.orderId == newOrder.orderId && this.stockItemId == newOrder.stockItemId && this.quantity == newOrder.quantity;
+//end of modifiable zone(JavaCode)........E/139eaf9b-c8c4-4a12-abe6-45c33a42e40f
+//begin of modifiable zone(JavaReturned)..C/139eaf9b-c8c4-4a12-abe6-45c33a42e40f
+
+//end of modifiable zone(JavaReturned)....E/139eaf9b-c8c4-4a12-abe6-45c33a42e40f
+    }
+
 }
