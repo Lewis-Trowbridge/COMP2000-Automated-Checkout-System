@@ -1,15 +1,10 @@
 package com.autochecksys.model;
 
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class StockFileAccess implements IFileAccess {
-    private static StockFileAccess instance;
-
-    public synchronized String read() {
+    @Override
+    public String read() {
 //begin of modifiable zone(JavaCode)......C/cf678d81-e7bd-487d-9c8f-c00c7a5b2c49
 
 //end of modifiable zone(JavaCode)........E/cf678d81-e7bd-487d-9c8f-c00c7a5b2c49
@@ -27,8 +22,9 @@ public class StockFileAccess implements IFileAccess {
     }
 //end of modifiable zone..................E/a6513b9b-46a5-4c8c-a7c0-8f16473cc6eb
 
-    public synchronized void write(String newContent) {
-//begin of modifiable zone(JavaCode)......C/02427273-e11c-4c08-a0de-38f6ea53f916
+    @Override
+    public void write(String newContent) {
+//begin of modifiable zone................T/100e8a54-28e5-44b1-ae2c-491d864e6ff0
         File stockFile = new File("./resources/stock.json");
         try {
             FileWriter writer = new FileWriter(stockFile);
@@ -37,27 +33,7 @@ public class StockFileAccess implements IFileAccess {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//end of modifiable zone(JavaCode)........E/02427273-e11c-4c08-a0de-38f6ea53f916
-    }
-
-    private StockFileAccess() {
-//begin of modifiable zone(JavaSuper).....C/7440b36a-b7fe-48c6-955d-467fae230a64
-
-//end of modifiable zone(JavaSuper).......E/7440b36a-b7fe-48c6-955d-467fae230a64
-//begin of modifiable zone(JavaCode)......C/7440b36a-b7fe-48c6-955d-467fae230a64
-
-//end of modifiable zone(JavaCode)........E/7440b36a-b7fe-48c6-955d-467fae230a64
-    }
-
-    public static StockFileAccess getInstance() {
-//begin of modifiable zone................T/d76b55d3-8e9a-49ca-8c6a-48142ea6090b
-        if (instance == null){
-            instance = new StockFileAccess();
-        }
-//end of modifiable zone..................E/d76b55d3-8e9a-49ca-8c6a-48142ea6090b
-//begin of modifiable zone................T/f7a27447-fb03-4feb-87f8-b7be7654d204
-        return instance;
-//end of modifiable zone..................E/f7a27447-fb03-4feb-87f8-b7be7654d204
+//end of modifiable zone..................E/100e8a54-28e5-44b1-ae2c-491d864e6ff0
     }
 
 }
