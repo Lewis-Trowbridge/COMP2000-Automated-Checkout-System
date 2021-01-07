@@ -1,12 +1,11 @@
 package com.autochecksys.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import com.autochecksys.KeyValuePair;
 import com.autochecksys.controller.shared.AbstractController;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class StockItem implements IAutoCheckSysModel {
     private int itemId;
