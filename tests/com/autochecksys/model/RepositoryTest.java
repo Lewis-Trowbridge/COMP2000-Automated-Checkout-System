@@ -16,6 +16,9 @@ public class RepositoryTest {
     StockItem testBanana;
     HashMap<String, AdminAccount> testAdminMap = new HashMap<>();
     AdminAccount testAdmin;
+    HashMap<Integer, StockOrder> testStockOrderMap = new HashMap<>();
+    StockOrder testJamOrder;
+    StockOrder testBananaOrder;
 
     @Before
     public void setUp(){
@@ -38,6 +41,17 @@ public class RepositoryTest {
         testAdmin.setPassword("unsecure");
         testAdminMap.put(testAdmin.getUsername(), testAdmin);
         Repository.getRepositoryInstance().adminAccounts = testAdminMap;
+
+        testJamOrder = new StockOrder();
+        testJamOrder.setOrderId(1);
+        testJamOrder.setStockItemId(testJam.getItemId());
+        testJamOrder.setQuantity(5000);
+        testStockOrderMap.put(testJamOrder.getOrderId(), testJamOrder);
+        testBananaOrder = new StockOrder();
+        testBananaOrder.setOrderId(2);
+        testBananaOrder.setStockItemId(testBanana.getItemId());
+        testBananaOrder.setQuantity(3);
+        Repository.getRepositoryInstance().stockOrders = testStockOrderMap;
     }
 
     @Test
@@ -111,5 +125,19 @@ public class RepositoryTest {
     public void loginWithIncorrectPasswordReturnsFalse(){
         boolean success = Repository.getRepositoryInstance().login(testAdmin.getUsername(), "notValid");
         assertFalse(success);
+    }
+
+    @Test
+    public void createStockOrderAddsCorrectly(){
+        Repository.getRepositoryInstance().stockItems.put(testBanana.getItemId(), testBanana);
+        Repository.getRepositoryInstance().createStockOrder(testBananaOrder.getStockItemId(), testBananaOrder.getQuantity());
+        StockOrder what = Repository.getRepositoryInstance().stockOrders.get(2);
+        assertEquals(testBananaOrder, what);
+    }
+
+    @Test
+    public void createStockOrderFulfillsCorrectly(){
+        Repository.getRepositoryInstance().fulfillStockOrder(1);
+        assertEquals(5030, Repository.getRepositoryInstance().stockItems.get(1).getStockCount());
     }
 }
