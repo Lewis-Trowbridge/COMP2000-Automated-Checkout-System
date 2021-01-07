@@ -70,23 +70,23 @@ public class StockOrder implements IAutoCheckSysModel {
     }
 
     public void add(AbstractController observer) {
-//begin of modifiable zone(JavaCode)......C/dd6f84fd-5683-4ee7-8dda-09471cf72503
+//begin of modifiable zone................T/58950baa-2088-441a-9b88-97db35a329a2
         this.observers.add(observer);
-//end of modifiable zone(JavaCode)........E/dd6f84fd-5683-4ee7-8dda-09471cf72503
+//end of modifiable zone..................E/58950baa-2088-441a-9b88-97db35a329a2
     }
 
     public void remove(AbstractController observer) {
-//begin of modifiable zone(JavaCode)......C/ade94f8d-c5a2-4988-9b0f-7ba79380a0af
+//begin of modifiable zone................T/0005fb2b-880d-484f-ac5d-fd0e3f704eba
         this.observers.remove(observer);
-//end of modifiable zone(JavaCode)........E/ade94f8d-c5a2-4988-9b0f-7ba79380a0af
+//end of modifiable zone..................E/0005fb2b-880d-484f-ac5d-fd0e3f704eba
     }
 
     public void onPropertyChanged(KeyValuePair change) {
-//begin of modifiable zone(JavaCode)......C/e63b2775-b254-4c6d-b858-9a5464756296
+//begin of modifiable zone................T/fc968a8f-b4b7-44b3-a40a-c9183a997f9c
         for (AbstractController observer : observers){
             observer.updateView(change);
         }
-//end of modifiable zone(JavaCode)........E/e63b2775-b254-4c6d-b858-9a5464756296
+//end of modifiable zone..................E/fc968a8f-b4b7-44b3-a40a-c9183a997f9c
     }
 
 }

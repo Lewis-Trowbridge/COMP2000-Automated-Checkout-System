@@ -29,20 +29,15 @@ public class StockFileAccessTest {
     }
 
     @Test
-    public void singletonSingleInstance(){
-        assertEquals(StockFileAccess.getInstance(), StockFileAccess.getInstance());
-    }
-
-    @Test
     public void readMatchesFake() {
-        String testContent = StockFileAccess.getInstance().read();
+        String testContent = FileAccessServiceLocator.getStockFileAccess().read();
         assertEquals(testContent, fakeContent);
     }
 
     @Test
     public void writeMatchesTest() {
         String testString = "{\"write\": \"test\"}";
-        StockFileAccess.getInstance().write(testString);
+        FileAccessServiceLocator.getStockFileAccess().write(testString);
         File testFile = new File("./resources/stock.json");
         char[] contentArray = new char[(int)testFile.length()];
         try {

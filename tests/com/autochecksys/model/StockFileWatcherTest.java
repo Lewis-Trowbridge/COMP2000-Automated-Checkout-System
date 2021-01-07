@@ -18,7 +18,7 @@ public class StockFileWatcherTest {
     public void setUp() throws Exception {
         testWatcher = new Thread(new StockFileWatcher());
         testWatcher.setDaemon(true);
-        realFileContent = StockFileAccess.getInstance().read();
+        realFileContent = FileAccessServiceLocator.getStockFileAccess().read();
     }
 
     @Test
@@ -33,7 +33,7 @@ public class StockFileWatcherTest {
         testWatcher.start();
         try {
             String testString = "{\"1\":{\"itemId\":1,\"itemName\":\"Jam\",\"itemPrice\":0.99,\"stockCount\":30}}";
-            StockFileAccess.getInstance().write(testString);
+            FileAccessServiceLocator.getStockFileAccess().write(testString);
             // Wait for the thread to update the repository
             Thread.sleep(500);
             assertEquals(stockItems, Repository.getRepositoryInstance().stockItems);

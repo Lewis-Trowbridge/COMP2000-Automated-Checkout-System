@@ -13,7 +13,7 @@ public class RepositoryTest {
 
     @Test
     public void updateDoesNotCreateNewObject(){
-        String jsonString = StockFileAccess.getInstance().read();
+        String jsonString = FileAccessServiceLocator.getStockFileAccess().read();
         StockItem oldItem = Repository.getRepositoryInstance().stockItems.get(1);
         Repository.getRepositoryInstance().updateStock(jsonString);
         assertSame(oldItem, Repository.getRepositoryInstance().stockItems.get(1));
@@ -21,7 +21,7 @@ public class RepositoryTest {
 
     @Test
     public void populateCreatesNewObject(){
-        String jsonString = StockFileAccess.getInstance().read();
+        String jsonString = FileAccessServiceLocator.getStockFileAccess().read();
         StockItem oldItem = Repository.getRepositoryInstance().stockItems.get(1);
         Repository.getRepositoryInstance().populateStock(jsonString);
         assertNotSame(oldItem, Repository.getRepositoryInstance().stockItems.get(1));

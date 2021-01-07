@@ -34,7 +34,9 @@ public class FileAccessServiceLocator {
 
     public static StockFileAccess getStockFileAccess() {
 //begin of modifiable zone................T/b31343e2-6879-4638-9306-53af5465919e
-        // Automatically generated method. Please delete this comment before entering specific code.
+        if (stockFileAccess == null){
+            stockFileAccess = new StockFileAccess();
+        }
 //end of modifiable zone..................E/b31343e2-6879-4638-9306-53af5465919e
 //begin of modifiable zone................T/37d4f1cb-02aa-4d24-8850-719fe834a6db
         return stockFileAccess;
@@ -43,7 +45,9 @@ public class FileAccessServiceLocator {
 
     public static AdminAccountFileAccess getAdminAccountFileAccess() {
 //begin of modifiable zone................T/d8000f72-9823-420d-bc74-46c9e51ae8cf
-        // Automatically generated method. Please delete this comment before entering specific code.
+        if (adminAccountFileAccess == null){
+            adminAccountFileAccess = new AdminAccountFileAccess();
+        }
 //end of modifiable zone..................E/d8000f72-9823-420d-bc74-46c9e51ae8cf
 //begin of modifiable zone................T/c9d78757-e3a2-47db-a146-fb565edcd078
         return adminAccountFileAccess;
@@ -52,7 +56,9 @@ public class FileAccessServiceLocator {
 
     public static StockOrderFileAccess getStockOrderFileAccess() {
 //begin of modifiable zone................T/cb7f0391-58d7-4987-acec-e4d250d64186
-        // Automatically generated method. Please delete this comment before entering specific code.
+        if (stockOrderFileAccess == null){
+            stockOrderFileAccess = new StockOrderFileAccess();
+        }
 //end of modifiable zone..................E/cb7f0391-58d7-4987-acec-e4d250d64186
 //begin of modifiable zone................T/50fcdec5-1db9-4f5c-8de0-7894a067d35e
         return stockOrderFileAccess;
