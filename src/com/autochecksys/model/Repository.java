@@ -154,7 +154,7 @@ watcherThread.start();
 //end of modifiable zone..................E/358dfe4b-5c5f-4758-8207-3eacb526167d
     }
 
-    public boolean editStockItem(int id, String name, float price, int quantity) {
+    public boolean editStockItem(int id, String name, Float price, Integer quantity) {
 //begin of modifiable zone................T/5e53f2ae-b161-4336-9257-2fda81c56390
         boolean success;
         try {
