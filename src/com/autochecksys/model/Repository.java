@@ -26,9 +26,15 @@ mapper = new ObjectMapper();
 populateStock(FileAccessServiceLocator.getStockFileAccess().read());
 populateAdminAccounts(FileAccessServiceLocator.getAdminAccountFileAccess().read());
 populateStockOrders(FileAccessServiceLocator.getStockOrderFileAccess().read());
-Thread watcherThread = new Thread(new StockFileWatcher(), "Stock file watcher");
-watcherThread.setDaemon(true);
-watcherThread.start();
+Thread stockWatcherThread = new Thread(new StockFileWatcher(), "Stock file watcher");
+stockWatcherThread.setDaemon(true);
+Thread adminWatcherThread = new Thread(new AdminAccountFileWatcher(), "Admin file watcher");
+adminWatcherThread.setDaemon(true);
+Thread orderWatcherThread = new Thread(new StockOrderFileWatcher(), "Order file watcher");
+orderWatcherThread.setDaemon(true);
+stockWatcherThread.start();
+adminWatcherThread.start();
+orderWatcherThread.start();
 
 //end of modifiable zone..................E/97abe80b-b10a-4b04-927e-85c05783e1f6
 //begin of modifiable zone(JavaCode)......C/190b61f6-ae29-4a9a-9053-baf0f262fe57
@@ -199,12 +205,7 @@ watcherThread.start();
         boolean validCredentials;
         try {
             AdminAccount accountToCheck = adminAccounts.get(username);
-            if (accountToCheck.getPassword().equals(password)){
-                validCredentials = true;
-            }
-            else {
-                validCredentials = false;
-            }
+            validCredentials = accountToCheck.getPassword().equals(password);
         } catch (Exception e){
             validCredentials = false;
         }
@@ -249,6 +250,12 @@ watcherThread.start();
 //begin of modifiable zone................T/cd57305a-1277-4150-a71f-2ff88908e2c8
         return success;
 //end of modifiable zone..................E/cd57305a-1277-4150-a71f-2ff88908e2c8
+    }
+
+    public void saveChanges() {
+//begin of modifiable zone(JavaCode)......C/c62752de-a7d0-4e5c-870d-0f03e7c63a72
+
+//end of modifiable zone(JavaCode)........E/c62752de-a7d0-4e5c-870d-0f03e7c63a72
     }
 
 }

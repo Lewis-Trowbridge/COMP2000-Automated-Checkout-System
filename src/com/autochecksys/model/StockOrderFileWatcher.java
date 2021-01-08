@@ -7,7 +7,7 @@ public class StockOrderFileWatcher implements IJsonFileWatcher, Runnable {
     @Override
     public void notify(String newFileContent) {
 //begin of modifiable zone(JavaCode)......C/089fad9e-a8a9-43f0-a9d9-edd6455180fc
-
+        Repository.getRepositoryInstance().updateStockOrders(newFileContent);
 //end of modifiable zone(JavaCode)........E/089fad9e-a8a9-43f0-a9d9-edd6455180fc
     }
 
