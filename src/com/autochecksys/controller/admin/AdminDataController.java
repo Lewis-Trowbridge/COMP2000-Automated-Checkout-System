@@ -1,5 +1,6 @@
 package com.autochecksys.controller.admin;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import com.autochecksys.KeyValuePair;
@@ -25,6 +26,19 @@ public class AdminDataController extends AbstractAdminDataController {
         // Register this controller as an observer for each of the models, as they will all be displayed
         for (IAutoCheckSysModel model: itemsToDisplay) {
             model.add(this);
+            try {
+                // Obtain data to display from this model
+                Integer itemId = (Integer) model.getClass().getDeclaredMethod("getItemId").invoke(model);
+                String itemName = (String) model.getClass().getDeclaredMethod("getItemName").invoke(model);
+                Float itemPrice = (Float) model.getClass().getDeclaredMethod("getItemPrice").invoke(model);
+                Integer itemStock = (Integer) model.getClass().getDeclaredMethod("getStockCount").invoke(model);
+                // Convert data obtained from model into a presentable format
+                String[] stringItemData = {Integer.toString(itemId), itemName, String.format("%.2f", itemPrice), Integer.toString(itemStock)};
+                // Pass the string array to the view to display as a new entry in the table
+                updateView(new KeyValuePair("NewStockItemDisplay", stringItemData, itemId));
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
         }
         // Perform the same operations for the stock orders as these will be displayed on the same page
         ordersToDisplay = new ArrayList<>(Repository.getRepositoryInstance().stockOrders.values());
@@ -37,7 +51,7 @@ public class AdminDataController extends AbstractAdminDataController {
     @Override
     public void updateView(KeyValuePair change) {
 //begin of modifiable zone(JavaCode)......C/8917e867-85e0-4654-bbc9-cade674e588a
-
+        this.viewToControl.update(change);
 //end of modifiable zone(JavaCode)........E/8917e867-85e0-4654-bbc9-cade674e588a
     }
 

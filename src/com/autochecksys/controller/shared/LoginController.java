@@ -23,8 +23,8 @@ public class LoginController extends AbstractLoginController {
         // Attempt a login and act on results
         if (Repository.getRepositoryInstance().login(username, password)){
             AdminDataPanel panel = new AdminDataPanel(this.viewToControl.mainFrameToUse);
-            panel.setController(new AdminDataController(panel));
             panel.setupAndDisplay();
+            panel.setController(new AdminDataController(panel));
         }
         else {
             JOptionPane.showMessageDialog(null, "Incorrect login credentials.");
