@@ -65,30 +65,45 @@ public class AdminDataPanel extends DisplayPanel {
 
         btnAddItem = new JButton("Add");
         GridBagConstraints btnAddItemConstraints = builder.setFill(GridBagConstraints.HORIZONTAL).build();
-        pnlItemControls.add(btnAddItem, btnAddItemConstraints);
 
         btnEditItem = new JButton("Edit");
         GridBagConstraints btnEditItemConstraints = builder.setGridX(1).setFill(GridBagConstraints.HORIZONTAL).build();
-        pnlItemControls.add(btnEditItem, btnEditItemConstraints);
 
         btnDeleteItem = new JButton("Delete");
         GridBagConstraints btnDeleteItemConstraints = builder.setGridX(2).setFill(GridBagConstraints.HORIZONTAL).build();
-        pnlItemControls.add(btnDeleteItem, btnDeleteItemConstraints);
 
         lblItemControlsTitle = new JLabel("Items");
         lblItemControlsTitle.setHorizontalAlignment(SwingConstants.CENTER);
         GridBagConstraints lblItemControlsTitleConstraints = builder.setGridY(1).setGridWidth(3).setFill(GridBagConstraints.HORIZONTAL).build();
-        pnlItemControls.add(lblItemControlsTitle, lblItemControlsTitleConstraints);
 
         pnlOrdersControls = new JPanel();
         pnlOrdersControls.setLayout(new GridBagLayout());
         pnlOrdersControls.setBorder(new LineBorder(Color.BLACK));
         GridBagConstraints pnlOrdersControlsConstraints = builder.setGridX(1).setGridY(1).setFill(GridBagConstraints.BOTH).build();
 
+        btnAddOrder = new JButton("Add");
+        GridBagConstraints btnAddOrderConstraints = builder.setFill(GridBagConstraints.HORIZONTAL).build();
+
+        btnFulfillOrder = new JButton("Fulfill");
+        GridBagConstraints btnFulfillOrderConstraints = builder.setGridX(1).setFill(GridBagConstraints.HORIZONTAL).build();
+
+        lblOrderControlsTitle = new JLabel("Orders");
+        lblOrderControlsTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        GridBagConstraints lblOrderControlsTitleConstraints = builder.setGridY(1).setGridWidth(2).setFill(GridBagConstraints.HORIZONTAL).build();
+
         Object[] orderColumns = {"ID", "Stock ID", "Quantity"};
         tblOrders = new JTable(new DefaultTableModel(orderColumns, 0));
         srpOrderTablePanel = new JScrollPane(tblOrders);
         GridBagConstraints srpOrderTablePanelConstraints = builder.setGridY(2).setGridWidth(2).setFill(GridBagConstraints.BOTH).build();
+
+        pnlOrdersControls.add(btnAddOrder, btnAddOrderConstraints);
+        pnlOrdersControls.add(btnFulfillOrder, btnFulfillOrderConstraints);
+        pnlOrdersControls.add(lblOrderControlsTitle, lblOrderControlsTitleConstraints);
+
+        pnlItemControls.add(btnAddItem, btnAddItemConstraints);
+        pnlItemControls.add(btnEditItem, btnEditItemConstraints);
+        pnlItemControls.add(btnDeleteItem, btnDeleteItemConstraints);
+        pnlItemControls.add(lblItemControlsTitle, lblItemControlsTitleConstraints);
 
         this.add(srpItemTablePanel, srpItemTablePanelConstraints);
         this.add(pnlItemControls, pnlItemControlsConstraints);
