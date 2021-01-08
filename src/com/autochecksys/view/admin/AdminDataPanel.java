@@ -1,10 +1,6 @@
 package com.autochecksys.view.admin;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -63,10 +59,29 @@ public class AdminDataPanel extends DisplayPanel {
         GridBagConstraints srpItemTablePanelConstraints = builder.setGridWidth(2).setFill(GridBagConstraints.BOTH).build();
 
         pnlItemControls = new JPanel();
+        pnlItemControls.setLayout(new GridBagLayout());
         pnlItemControls.setBorder(new LineBorder(Color.BLACK));
         GridBagConstraints pnlItemControlsConstraints = builder.setGridY(1).setFill(GridBagConstraints.BOTH).build();
 
+        btnAddItem = new JButton("Add");
+        GridBagConstraints btnAddItemConstraints = builder.setFill(GridBagConstraints.HORIZONTAL).build();
+        pnlItemControls.add(btnAddItem, btnAddItemConstraints);
+
+        btnEditItem = new JButton("Edit");
+        GridBagConstraints btnEditItemConstraints = builder.setGridX(1).setFill(GridBagConstraints.HORIZONTAL).build();
+        pnlItemControls.add(btnEditItem, btnEditItemConstraints);
+
+        btnDeleteItem = new JButton("Delete");
+        GridBagConstraints btnDeleteItemConstraints = builder.setGridX(2).setFill(GridBagConstraints.HORIZONTAL).build();
+        pnlItemControls.add(btnDeleteItem, btnDeleteItemConstraints);
+
+        lblItemControlsTitle = new JLabel("Items");
+        lblItemControlsTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        GridBagConstraints lblItemControlsTitleConstraints = builder.setGridY(1).setGridWidth(3).setFill(GridBagConstraints.HORIZONTAL).build();
+        pnlItemControls.add(lblItemControlsTitle, lblItemControlsTitleConstraints);
+
         pnlOrdersControls = new JPanel();
+        pnlOrdersControls.setLayout(new GridBagLayout());
         pnlOrdersControls.setBorder(new LineBorder(Color.BLACK));
         GridBagConstraints pnlOrdersControlsConstraints = builder.setGridX(1).setGridY(1).setFill(GridBagConstraints.BOTH).build();
 
