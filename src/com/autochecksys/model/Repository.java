@@ -254,7 +254,10 @@ orderWatcherThread.start();
 
     public void saveChanges() {
 //begin of modifiable zone(JavaCode)......C/c62752de-a7d0-4e5c-870d-0f03e7c63a72
-
+        // Launch the save changes worker to do all file operations in a background thread and avoid disturbing the
+        // Swing thread
+        Thread saveChangesWorker = new Thread(new SaveChangesWorker(mapper), "Save changes worker thread");
+        saveChangesWorker.start();
 //end of modifiable zone(JavaCode)........E/c62752de-a7d0-4e5c-870d-0f03e7c63a72
     }
 

@@ -6,14 +6,14 @@ public class StockOrderFileWatcher implements IJsonFileWatcher, Runnable {
 
     @Override
     public void notify(String newFileContent) {
-//begin of modifiable zone(JavaCode)......C/089fad9e-a8a9-43f0-a9d9-edd6455180fc
+//begin of modifiable zone................T/a170c128-ca49-4fc4-abdd-43b714481007
         Repository.getRepositoryInstance().updateStockOrders(newFileContent);
-//end of modifiable zone(JavaCode)........E/089fad9e-a8a9-43f0-a9d9-edd6455180fc
+//end of modifiable zone..................E/a170c128-ca49-4fc4-abdd-43b714481007
     }
 
     @Override
     public void run() {
-//begin of modifiable zone(JavaCode)......C/1d2124bd-fcd9-4d38-b44d-eb44881c00b8
+//begin of modifiable zone................T/bfb5c4c0-88e6-44fa-9add-89d5b4394004
         currentContent = FileAccessServiceLocator.getStockOrderFileAccess().read();
         while (true) {
             String newlyReadContent = FileAccessServiceLocator.getStockOrderFileAccess().read();
@@ -27,7 +27,7 @@ public class StockOrderFileWatcher implements IJsonFileWatcher, Runnable {
                 e.printStackTrace();
             }
         }
-//end of modifiable zone(JavaCode)........E/1d2124bd-fcd9-4d38-b44d-eb44881c00b8
+//end of modifiable zone..................E/bfb5c4c0-88e6-44fa-9add-89d5b4394004
     }
 
 }
