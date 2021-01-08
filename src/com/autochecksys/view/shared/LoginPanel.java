@@ -74,6 +74,18 @@ public class LoginPanel extends DisplayPanel {
 
     private void setUpEventListeners() {
 //begin of modifiable zone................T/fbdd913e-818e-4d84-ab4c-b7ddac9d3ccf
+        this.btnLogin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    String usernameInput = txfUsername.getText();
+                    String passwordInput = txfPassword.getText();
+                    controller.getClass().getDeclaredMethod("checkLogin", String.class, String.class).invoke(controller, usernameInput, passwordInput);
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException noSuchMethodException) {
+                    noSuchMethodException.printStackTrace();
+                }
+            }
+        });
         this.btnGoToCheckout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
