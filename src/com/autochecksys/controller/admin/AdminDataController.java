@@ -44,6 +44,15 @@ public class AdminDataController extends AbstractAdminDataController {
         ordersToDisplay = new ArrayList<>(Repository.getRepositoryInstance().stockOrders.values());
         for (IAutoCheckSysModel model: ordersToDisplay){
             model.add(this);
+            try {
+                Integer orderId = (Integer) model.getClass().getDeclaredMethod("getOrderId").invoke(model);
+                Integer stockItemId = (Integer) model.getClass().getDeclaredMethod("getStockItemId").invoke(model);
+                Integer quantity = (Integer) model.getClass().getDeclaredMethod("getQuantity").invoke(model);
+                String[] orderData = {Integer.toString(orderId), Integer.toString(stockItemId), Integer.toString(quantity)};
+                updateView(new KeyValuePair("NewStockOrderDisplay", orderData, orderId));
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
         }
 //end of modifiable zone(JavaCode)........E/bee3a8dc-85c8-411a-9ffe-015b0f37cf1f
     }

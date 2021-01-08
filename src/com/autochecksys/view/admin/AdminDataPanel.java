@@ -118,10 +118,16 @@ public class AdminDataPanel extends DisplayPanel {
     public void update(KeyValuePair change) {
 //begin of modifiable zone(JavaCode)......C/1f76c533-4e4c-4297-aa9f-4d6645fa2c9a
         DefaultTableModel itemModel = (DefaultTableModel) tblItems.getModel();
+        DefaultTableModel orderModel = (DefaultTableModel) tblOrders.getModel();
         switch (change.key){
             case "NewStockItemDisplay":
                 String[] itemData = (String[]) change.value;
                 itemModel.addRow(itemData);
+                break;
+            case "NewStockOrderDisplay":
+                String[] orderData = (String[]) change.value;
+                orderModel.addRow(orderData);
+                break;
         }
 //end of modifiable zone(JavaCode)........E/1f76c533-4e4c-4297-aa9f-4d6645fa2c9a
     }
