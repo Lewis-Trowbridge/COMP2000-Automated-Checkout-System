@@ -5,9 +5,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+
 import com.autochecksys.KeyValuePair;
 import com.autochecksys.view.shared.DisplayPanel;
+import com.autochecksys.view.shared.GridBagConstraintsBuilder;
 import com.autochecksys.view.shared.MainFrame;
+
+import java.awt.*;
 
 public class AdminDataPanel extends DisplayPanel {
     public JScrollPane srpItemTablePanel;
@@ -48,7 +54,33 @@ public class AdminDataPanel extends DisplayPanel {
     @Override
     protected void setUpComponents() {
 //begin of modifiable zone(JavaCode)......C/5fb5842d-3d9e-49bd-a108-60fd43f3151b
+        this.setLayout(new GridBagLayout());
+        GridBagConstraintsBuilder builder = new GridBagConstraintsBuilder();
 
+        Object[] itemColumns = {"ID", "Name", "Price", "Stock"};
+        tblItems = new JTable(new DefaultTableModel(itemColumns, 0));
+        srpItemTablePanel = new JScrollPane(tblItems);
+        GridBagConstraints srpItemTablePanelConstraints = builder.setGridWidth(2).setFill(GridBagConstraints.BOTH).build();
+
+        pnlItemControls = new JPanel();
+        pnlItemControls.setBorder(new LineBorder(Color.BLACK));
+        GridBagConstraints pnlItemControlsConstraints = builder.setGridY(1).setFill(GridBagConstraints.BOTH).build();
+
+        pnlOrdersControls = new JPanel();
+        pnlOrdersControls.setBorder(new LineBorder(Color.BLACK));
+        GridBagConstraints pnlOrdersControlsConstraints = builder.setGridX(1).setGridY(1).setFill(GridBagConstraints.BOTH).build();
+
+        Object[] orderColumns = {"ID", "Stock ID", "Quantity"};
+        tblOrders = new JTable(new DefaultTableModel(orderColumns, 0));
+        srpOrderTablePanel = new JScrollPane(tblOrders);
+        GridBagConstraints srpOrderTablePanelConstraints = builder.setGridY(2).setGridWidth(2).setFill(GridBagConstraints.BOTH).build();
+
+        this.add(srpItemTablePanel, srpItemTablePanelConstraints);
+        this.add(pnlItemControls, pnlItemControlsConstraints);
+        this.add(pnlOrdersControls, pnlOrdersControlsConstraints);
+        this.add(srpOrderTablePanel, srpOrderTablePanelConstraints);
+
+        setUpEventListeners();
 //end of modifiable zone(JavaCode)........E/5fb5842d-3d9e-49bd-a108-60fd43f3151b
     }
 
