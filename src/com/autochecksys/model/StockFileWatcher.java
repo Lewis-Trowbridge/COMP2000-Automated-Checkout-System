@@ -16,7 +16,7 @@ public class StockFileWatcher implements IJsonFileWatcher, Runnable {
         currentContent = FileAccessServiceLocator.getStockFileAccess().read();
         while (true) {
             String newlyReadContent = FileAccessServiceLocator.getStockFileAccess().read();
-            if (!newlyReadContent.equals(currentContent)){
+            if (!newlyReadContent.equals(currentContent) && !newlyReadContent.isEmpty()){
                 notify(newlyReadContent);
                 currentContent = newlyReadContent;
             }

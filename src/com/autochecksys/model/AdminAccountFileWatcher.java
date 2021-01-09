@@ -17,7 +17,7 @@ public class AdminAccountFileWatcher implements IJsonFileWatcher, Runnable {
         currentContent = FileAccessServiceLocator.getAdminAccountFileAccess().read();
         while (true) {
             String newlyReadContent = FileAccessServiceLocator.getAdminAccountFileAccess().read();
-            if (!newlyReadContent.equals(currentContent)){
+            if (!newlyReadContent.equals(currentContent) || !newlyReadContent.isEmpty()){
                 notify(newlyReadContent);
                 currentContent = newlyReadContent;
             }
