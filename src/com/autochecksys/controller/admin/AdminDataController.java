@@ -17,10 +17,11 @@ public class AdminDataController extends AbstractAdminDataController {
     public List<IAutoCheckSysModel> ordersToDisplay;
 
     public AdminDataController(DisplayPanel viewToControl) {
-//begin of modifiable zone(JavaSuper).....C/bee3a8dc-85c8-411a-9ffe-015b0f37cf1f
-        this.viewToControl = viewToControl;
-//end of modifiable zone(JavaSuper).......E/bee3a8dc-85c8-411a-9ffe-015b0f37cf1f
-//begin of modifiable zone(JavaCode)......C/bee3a8dc-85c8-411a-9ffe-015b0f37cf1f
+//begin of modifiable zone................T/faa1db4a-7f88-4429-8753-59fb31e72593
+this.viewToControl = viewToControl;
+
+//end of modifiable zone..................E/faa1db4a-7f88-4429-8753-59fb31e72593
+//begin of modifiable zone................T/585269e9-16bd-4cff-9250-59acc6a32f51
         // Convert the map into a temporary arraylist, since all stock items need to be displayed on this screen.
         itemsToDisplay = new ArrayList<>(Repository.getRepositoryInstance().stockItems.values());
         // Register this controller as an observer for each of the models, as they will all be displayed
@@ -54,14 +55,14 @@ public class AdminDataController extends AbstractAdminDataController {
                 e.printStackTrace();
             }
         }
-//end of modifiable zone(JavaCode)........E/bee3a8dc-85c8-411a-9ffe-015b0f37cf1f
+//end of modifiable zone..................E/585269e9-16bd-4cff-9250-59acc6a32f51
     }
 
     @Override
     public void updateView(KeyValuePair change) {
-//begin of modifiable zone(JavaCode)......C/8917e867-85e0-4654-bbc9-cade674e588a
+//begin of modifiable zone................T/57ff0edc-daf9-4cd7-b0b2-4e0180f800ea
         this.viewToControl.update(change);
-//end of modifiable zone(JavaCode)........E/8917e867-85e0-4654-bbc9-cade674e588a
+//end of modifiable zone..................E/57ff0edc-daf9-4cd7-b0b2-4e0180f800ea
     }
 
     @Override
@@ -73,7 +74,7 @@ public class AdminDataController extends AbstractAdminDataController {
 
     @Override
     public void addStockItem(String name, float price, int quantity) {
-//begin of modifiable zone(JavaCode)......C/d2d5a9ec-bf21-47b5-a4d6-e7e9b1460c75
+//begin of modifiable zone................T/a6dc2641-4429-4428-8a5f-31c41fe25101
         StockItem newItem = Repository.getRepositoryInstance().addStockItem(name, price, quantity);
         if (newItem != null){
             // Save changes back to the file in a background thread
@@ -85,11 +86,11 @@ public class AdminDataController extends AbstractAdminDataController {
             String[] itemData = {Integer.toString(newItem.getItemId()), newItem.getItemName(), String.format("%.2f", newItem.getItemPrice()), Integer.toString(newItem.getStockCount())};
             updateView(new KeyValuePair("NewStockItemDisplay", itemData, newItem.getItemId()));
         }
-//end of modifiable zone(JavaCode)........E/d2d5a9ec-bf21-47b5-a4d6-e7e9b1460c75
+//end of modifiable zone..................E/a6dc2641-4429-4428-8a5f-31c41fe25101
     }
 
     @Override
-    public void editStockItem(String name, float price, int quantity) {
+    public void editStockItem(int id, String name, float price, int quantity) {
 //begin of modifiable zone(JavaCode)......C/596cc404-c712-4b65-999e-02245b872664
 
 //end of modifiable zone(JavaCode)........E/596cc404-c712-4b65-999e-02245b872664

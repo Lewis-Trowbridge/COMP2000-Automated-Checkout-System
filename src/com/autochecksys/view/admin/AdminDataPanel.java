@@ -152,6 +152,29 @@ public class AdminDataPanel extends DisplayPanel {
                 }
             }
         });
+        btnEditItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int currentRow = tblItems.getSelectedRow();
+                    if (currentRow != -1){
+                        // Get values ready
+                        String selectedName = (String) tblItems.getValueAt(currentRow, 1);
+                        String selectedPrice = (String) tblItems.getValueAt(currentRow, 2);
+                        String selectedStock = (String) tblItems.getValueAt(currentRow, 3);
+                        EditItemDialog editDialog = new EditItemDialog(mainFrameToUse, selectedName, selectedPrice, selectedStock);
+                        Object[] results = editDialog.showDialog();
+                        if (results.length != 0){
+                            String selectedId = (String) tblItems.getValueAt(currentRow, 0);
+                            int id = Integer.parseInt(selectedId);
+                            controller.getClass().getDeclaredMethod("editStockItem", int.class, String.class, float.class, int.class).invoke(controller, id, (String) results[0], (float) results[1], (int) results[2]);
+                        }
+                    }
+                } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
 //end of modifiable zone(JavaCode)........E/aec23e2f-2de6-431e-ac5d-bd617ba2e6e2
     }
 
