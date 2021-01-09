@@ -10,6 +10,9 @@ import com.autochecksys.view.shared.GridBagConstraintsBuilder;
 import com.autochecksys.view.shared.MainFrame;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.lang.reflect.InvocationTargetException;
 
 public class AdminDataPanel extends DisplayPanel {
     public JScrollPane srpItemTablePanel;
@@ -134,7 +137,21 @@ public class AdminDataPanel extends DisplayPanel {
 
     private void setUpEventListeners() {
 //begin of modifiable zone(JavaCode)......C/aec23e2f-2de6-431e-ac5d-bd617ba2e6e2
-
+        btnAddItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    AddItemDialog addDialog = new AddItemDialog(mainFrameToUse);
+                    Object[] results = addDialog.showDialog();
+                    addDialog.dispose();
+                    if (results.length != 0){
+                        controller.getClass().getDeclaredMethod("addStockItem", String.class, float.class, int.class).invoke(controller, (String)results[0], (Float)results[1], (Integer)results[2]);
+                    }
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException noSuchMethodException) {
+                    noSuchMethodException.printStackTrace();
+                }
+            }
+        });
 //end of modifiable zone(JavaCode)........E/aec23e2f-2de6-431e-ac5d-bd617ba2e6e2
     }
 
