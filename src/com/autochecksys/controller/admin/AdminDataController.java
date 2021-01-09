@@ -74,7 +74,17 @@ public class AdminDataController extends AbstractAdminDataController {
     @Override
     public void addStockItem(String name, float price, int quantity) {
 //begin of modifiable zone(JavaCode)......C/d2d5a9ec-bf21-47b5-a4d6-e7e9b1460c75
-
+        StockItem newItem = Repository.getRepositoryInstance().addStockItem(name, price, quantity);
+        if (newItem != null){
+            // Save changes back to the file in a background thread
+            Repository.getRepositoryInstance().saveChanges();
+            // Add this to the controller's array of models
+            this.itemsToDisplay.add(newItem);
+            // Add this controller to the model's observers
+            newItem.add(this);
+            String[] itemData = {Integer.toString(newItem.getItemId()), newItem.getItemName(), String.format("%.2f", newItem.getItemPrice()), Integer.toString(newItem.getStockCount())};
+            updateView(new KeyValuePair("NewStockItemDisplay", itemData, newItem.getItemId()));
+        }
 //end of modifiable zone(JavaCode)........E/d2d5a9ec-bf21-47b5-a4d6-e7e9b1460c75
     }
 

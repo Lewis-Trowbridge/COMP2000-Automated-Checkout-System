@@ -122,9 +122,8 @@ orderWatcherThread.start();
 //end of modifiable zone..................E/cdd9c35d-7b81-4900-b33f-ea3cb49f87e4
     }
 
-    public boolean addStockItem(String name, float price, int quantity) {
+    public StockItem addStockItem(String name, float price, int quantity) {
 //begin of modifiable zone................T/dc09a2be-d597-4fdb-8e95-5602e903045d
-        boolean success;
         try {
             Integer highestKey = Collections.max(stockItems.keySet());
             StockItem newItem = new StockItem();
@@ -133,14 +132,14 @@ orderWatcherThread.start();
             newItem.setItemPrice(price);
             newItem.setStockCount(quantity);
             stockItems.put(highestKey + 1, newItem);
-            success = true;
+            return newItem;
         }
         catch (Exception e){
-            success = false;
+            return null;
         }
 //end of modifiable zone..................E/dc09a2be-d597-4fdb-8e95-5602e903045d
 //begin of modifiable zone................T/8614ff85-c99a-4e1d-9c57-21ee14827756
-        return success;
+        
 //end of modifiable zone..................E/8614ff85-c99a-4e1d-9c57-21ee14827756
     }
 
@@ -160,27 +159,25 @@ orderWatcherThread.start();
 //end of modifiable zone..................E/358dfe4b-5c5f-4758-8207-3eacb526167d
     }
 
-    public boolean editStockItem(int id, String name, Float price, Integer quantity) {
+    public StockItem editStockItem(int id, String name, Float price, Integer quantity) {
 //begin of modifiable zone................T/5e53f2ae-b161-4336-9257-2fda81c56390
-        boolean success;
         try {
             StockItem itemToEdit = stockItems.get(id);
             if (name != null){
                 itemToEdit.setItemName(name);
             }
-            if (!Float.valueOf(price).equals(null)){
+            if (Float.valueOf(price) != null){
                 itemToEdit.setItemPrice(price);
             }
             if (Integer.valueOf(quantity) != null){
                 itemToEdit.setStockCount(quantity);
             }
-            success = true;
+            return itemToEdit;
         } catch (Exception e){
-            success = false;
+            return null;
         }
 //end of modifiable zone..................E/5e53f2ae-b161-4336-9257-2fda81c56390
 //begin of modifiable zone................T/e6ee97cc-eb41-44df-964f-ebd191f794d6
-        return success;
 //end of modifiable zone..................E/e6ee97cc-eb41-44df-964f-ebd191f794d6
     }
 
@@ -215,9 +212,8 @@ orderWatcherThread.start();
 //end of modifiable zone..................E/6832c0f5-1289-44ac-a0ca-3591ae9c33e8
     }
 
-    public boolean createStockOrder(int itemId, int quantity) {
+    public StockOrder createStockOrder(int itemId, int quantity) {
 //begin of modifiable zone................T/493dc76b-defd-4ff8-8340-7cc63cc01307
-        boolean success;
         try {
             Integer highestKey = Collections.max(stockOrders.keySet());
             StockOrder newOrder = new StockOrder();
@@ -225,13 +221,12 @@ orderWatcherThread.start();
             newOrder.setStockItemId(itemId);
             newOrder.setQuantity(quantity);
             stockOrders.put(highestKey + 1, newOrder);
-            success = true;
+            return newOrder;
         } catch (Exception e){
-            success = false;
+            return null;
         }
 //end of modifiable zone..................E/493dc76b-defd-4ff8-8340-7cc63cc01307
 //begin of modifiable zone................T/76364ef5-8254-4b00-8976-325bf9a16b84
-        return success;
 //end of modifiable zone..................E/76364ef5-8254-4b00-8976-325bf9a16b84
     }
 
@@ -253,12 +248,12 @@ orderWatcherThread.start();
     }
 
     public void saveChanges() {
-//begin of modifiable zone(JavaCode)......C/c62752de-a7d0-4e5c-870d-0f03e7c63a72
+//begin of modifiable zone................T/ea2cb0ca-0ced-48d9-88e9-310ac6236fd3
         // Launch the save changes worker to do all file operations in a background thread and avoid disturbing the
         // Swing thread
         Thread saveChangesWorker = new Thread(new SaveChangesWorker(mapper), "Save changes worker thread");
         saveChangesWorker.start();
-//end of modifiable zone(JavaCode)........E/c62752de-a7d0-4e5c-870d-0f03e7c63a72
+//end of modifiable zone..................E/ea2cb0ca-0ced-48d9-88e9-310ac6236fd3
     }
 
 }
