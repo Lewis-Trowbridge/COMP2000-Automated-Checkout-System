@@ -5,6 +5,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.autochecksys.KeyValuePair;
+import com.autochecksys.controller.shared.AbstractController;
 import com.autochecksys.view.shared.DisplayPanel;
 import com.autochecksys.view.shared.GridBagConstraintsBuilder;
 import com.autochecksys.view.shared.MainFrame;
@@ -131,8 +132,33 @@ public class AdminDataPanel extends DisplayPanel {
                 String[] orderData = (String[]) change.value;
                 orderModel.addRow(orderData);
                 break;
+            case AbstractController.ITEM_NAME:
+                String newName = (String) change.value;
+                replaceItemTableValueWithId(change.id, 1, newName);
+                break;
+            case AbstractController.ITEM_PRICE:
+                float newPrice = (float) change.value;
+                String newPriceString = String.format("%.2f", newPrice);
+                replaceItemTableValueWithId(change.id, 2, newPriceString);
+                break;
+            case AbstractController.STOCK_COUNT:
+                int newCount = (int) change.value;
+                String newCountString = Integer.toString(newCount);
+                replaceItemTableValueWithId(change.id, 3, newCountString);
         }
 //end of modifiable zone(JavaCode)........E/1f76c533-4e4c-4297-aa9f-4d6645fa2c9a
+    }
+
+    private void replaceItemTableValueWithId(int id, int column, String value){
+        DefaultTableModel model = (DefaultTableModel) tblItems.getModel();
+        for (int i = 0; i < model.getRowCount(); i++){
+            String currentStringId = (String) model.getValueAt(i, 0);
+            int currentId = Integer.parseInt(currentStringId);
+            if (currentId == id){
+                model.setValueAt(value, i, column);
+                model.fireTableCellUpdated(i, column);
+            }
+        }
     }
 
     private void setUpEventListeners() {

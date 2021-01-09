@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import com.autochecksys.KeyValuePair;
+import com.autochecksys.controller.shared.AbstractController;
 import com.autochecksys.model.IAutoCheckSysModel;
 import com.autochecksys.model.Repository;
 import com.autochecksys.model.StockItem;
@@ -84,7 +85,7 @@ this.viewToControl = viewToControl;
             // Add this controller to the model's observers
             newItem.add(this);
             String[] itemData = {Integer.toString(newItem.getItemId()), newItem.getItemName(), String.format("%.2f", newItem.getItemPrice()), Integer.toString(newItem.getStockCount())};
-            updateView(new KeyValuePair("NewStockItemDisplay", itemData, newItem.getItemId()));
+             updateView(new KeyValuePair("NewStockItemDisplay", itemData, newItem.getItemId()));
         }
 //end of modifiable zone..................E/a6dc2641-4429-4428-8a5f-31c41fe25101
     }
@@ -92,7 +93,12 @@ this.viewToControl = viewToControl;
     @Override
     public void editStockItem(int id, String name, float price, int quantity) {
 //begin of modifiable zone(JavaCode)......C/596cc404-c712-4b65-999e-02245b872664
-
+        StockItem editedItem = Repository.getRepositoryInstance().editStockItem(id, name, price, quantity);
+        // Observers will be updated by the model objects themselves when their properties are changed, so
+        // there is no need to explicitly update the view
+        if (editedItem != null){
+            Repository.getRepositoryInstance().saveChanges();
+        }
 //end of modifiable zone(JavaCode)........E/596cc404-c712-4b65-999e-02245b872664
     }
 
