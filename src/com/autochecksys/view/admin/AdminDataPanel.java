@@ -123,6 +123,7 @@ public class AdminDataPanel extends DisplayPanel {
 //begin of modifiable zone(JavaCode)......C/1f76c533-4e4c-4297-aa9f-4d6645fa2c9a
         DefaultTableModel itemModel = (DefaultTableModel) tblItems.getModel();
         DefaultTableModel orderModel = (DefaultTableModel) tblOrders.getModel();
+        int row;
         switch (change.key){
             case "NewStockItemDisplay":
                 String[] itemData = (String[]) change.value;
@@ -134,8 +135,13 @@ public class AdminDataPanel extends DisplayPanel {
                 break;
             case "DeleteStockItem":
                 Integer stockIdToDelete = (Integer) change.value;
-                int row = getRowWithId(stockIdToDelete, tblItems);
+                row = getRowWithId(stockIdToDelete, tblItems);
                 itemModel.removeRow(row);
+                break;
+            case "FulfillStockOrder":
+                int orderIdToDelete = (int) change.value;
+                row = getRowWithId(orderIdToDelete, tblOrders);
+                orderModel.removeRow(row);
                 break;
             case AbstractController.ITEM_NAME:
                 String newName = (String) change.value;
@@ -150,6 +156,7 @@ public class AdminDataPanel extends DisplayPanel {
                 int newCount = (int) change.value;
                 String newCountString = Integer.toString(newCount);
                 replaceItemTableValueWithId(change.id, 3, newCountString, tblItems);
+                break;
         }
 //end of modifiable zone(JavaCode)........E/1f76c533-4e4c-4297-aa9f-4d6645fa2c9a
     }
@@ -249,6 +256,20 @@ public class AdminDataPanel extends DisplayPanel {
                     } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | NumberFormatException ex) {
                         ex.printStackTrace();
                     }
+                }
+            }
+        });
+
+        btnFulfillOrder.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int currentOrderRow = tblOrders.getSelectedRow();
+                String currentOrderIdString = (String) tblOrders.getValueAt(currentOrderRow, 0);
+                int currentOrderId = Integer.parseInt(currentOrderIdString);
+                try {
+                    controller.getClass().getDeclaredMethod("fulfillStockOrder", int.class).invoke(controller, currentOrderId);
+                } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException ex) {
+                    ex.printStackTrace();
                 }
             }
         });

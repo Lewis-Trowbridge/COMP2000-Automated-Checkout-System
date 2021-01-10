@@ -131,7 +131,10 @@ this.viewToControl = viewToControl;
     @Override
     public void fulfillStockOrder(int orderId) {
 //begin of modifiable zone(JavaCode)......C/7f5cd3af-e26b-48cf-a1d7-825cfcbd5644
-
+        if (Repository.getRepositoryInstance().fulfillStockOrder(orderId)){
+            Repository.getRepositoryInstance().saveChanges();
+            updateView(new KeyValuePair("FulfillStockOrder", orderId, orderId));
+        }
 //end of modifiable zone(JavaCode)........E/7f5cd3af-e26b-48cf-a1d7-825cfcbd5644
     }
 
