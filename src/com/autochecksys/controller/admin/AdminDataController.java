@@ -85,7 +85,7 @@ this.viewToControl = viewToControl;
             // Add this controller to the model's observers
             newItem.add(this);
             String[] itemData = {Integer.toString(newItem.getItemId()), newItem.getItemName(), String.format("%.2f", newItem.getItemPrice()), Integer.toString(newItem.getStockCount())};
-             updateView(new KeyValuePair("NewStockItemDisplay", itemData, newItem.getItemId()));
+            updateView(new KeyValuePair("NewStockItemDisplay", itemData, newItem.getItemId()));
         }
 //end of modifiable zone..................E/a6dc2641-4429-4428-8a5f-31c41fe25101
     }

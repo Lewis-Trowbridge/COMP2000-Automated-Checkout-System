@@ -178,6 +178,7 @@ public class AdminDataPanel extends DisplayPanel {
                 }
             }
         });
+
         btnEditItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -198,6 +199,22 @@ public class AdminDataPanel extends DisplayPanel {
                     }
                 } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException ex) {
                     ex.printStackTrace();
+                }
+            }
+        });
+
+        btnDeleteItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int currentRow = tblItems.getSelectedRow();
+                if (currentRow != -1){
+                    String stringCurrentId = (String) tblItems.getValueAt(currentRow, 0);
+                    Integer currentId = Integer.parseInt(stringCurrentId);
+                    try {
+                        controller.getClass().getDeclaredMethod("deleteStockItem", int.class).invoke(controller, currentId);
+                    } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
         });
