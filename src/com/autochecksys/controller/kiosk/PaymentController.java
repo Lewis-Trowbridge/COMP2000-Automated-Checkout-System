@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.autochecksys.KeyValuePair;
 import com.autochecksys.model.IAutoCheckSysModel;
+import com.autochecksys.model.Repository;
 import com.autochecksys.view.shared.DisplayPanel;
 
 import javax.swing.*;
@@ -59,13 +60,16 @@ public class PaymentController extends AbstractPaymentController {
         // Iterate through all models in basket and add their names and prices to the receipt string using reflection
         for (IAutoCheckSysModel model: basket) {
             try {
-                String name = (String)model.getClass().getDeclaredMethod("getItemName").invoke(model, null);
-                String price = Float.toString((Float)model.getClass().getDeclaredMethod("getItemPrice").invoke(model, null));
+                Integer id = (Integer) model.getClass().getDeclaredMethod("getItemId").invoke(model);
+                Repository.getRepositoryInstance().decrementBoughtItem(id);
+                String name = (String)model.getClass().getDeclaredMethod("getItemName").invoke(model);
+                String price = Float.toString((Float)model.getClass().getDeclaredMethod("getItemPrice").invoke(model));
                 receiptString.append(name).append("     £").append(price).append("\n");
             } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 e.printStackTrace();
             }
         }
+        Repository.getRepositoryInstance().saveChanges();
         // Add total to receipt
         receiptString.append("Total paid: £").append(String.format("%.2f", totalToPay)).append("\n");
         // Add payment message - this will contain all relevant information from the payment method
