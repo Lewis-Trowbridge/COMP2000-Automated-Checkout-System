@@ -132,33 +132,45 @@ public class AdminDataPanel extends DisplayPanel {
                 String[] orderData = (String[]) change.value;
                 orderModel.addRow(orderData);
                 break;
+            case "DeleteStockItem":
+                Integer stockIdToDelete = (Integer) change.value;
+                int row = getRowWithId(stockIdToDelete, tblItems);
+                itemModel.removeRow(row);
             case AbstractController.ITEM_NAME:
                 String newName = (String) change.value;
-                replaceItemTableValueWithId(change.id, 1, newName);
+                replaceItemTableValueWithId(change.id, 1, newName, tblItems);
                 break;
             case AbstractController.ITEM_PRICE:
                 float newPrice = (float) change.value;
                 String newPriceString = String.format("%.2f", newPrice);
-                replaceItemTableValueWithId(change.id, 2, newPriceString);
+                replaceItemTableValueWithId(change.id, 2, newPriceString, tblItems);
                 break;
             case AbstractController.STOCK_COUNT:
                 int newCount = (int) change.value;
                 String newCountString = Integer.toString(newCount);
-                replaceItemTableValueWithId(change.id, 3, newCountString);
+                replaceItemTableValueWithId(change.id, 3, newCountString, tblItems);
         }
 //end of modifiable zone(JavaCode)........E/1f76c533-4e4c-4297-aa9f-4d6645fa2c9a
     }
 
-    private void replaceItemTableValueWithId(int id, int column, String value){
-        DefaultTableModel model = (DefaultTableModel) tblItems.getModel();
-        for (int i = 0; i < model.getRowCount(); i++){
-            String currentStringId = (String) model.getValueAt(i, 0);
+    // Utility method to replace a value in the items
+    private void replaceItemTableValueWithId(int id, int column, String value, JTable tableToReplace){
+        DefaultTableModel model = (DefaultTableModel) tableToReplace.getModel();
+        int row = getRowWithId(id, tableToReplace);
+        model.setValueAt(value, row, column);
+        model.fireTableCellUpdated(row, column);
+    }
+
+    private int getRowWithId(int id, JTable tableToSearch){
+        DefaultTableModel model = (DefaultTableModel) tableToSearch.getModel();
+        for (int currentRow = 0; currentRow < model.getRowCount(); currentRow++){
+            String currentStringId = (String) model.getValueAt(currentRow, 0);
             int currentId = Integer.parseInt(currentStringId);
             if (currentId == id){
-                model.setValueAt(value, i, column);
-                model.fireTableCellUpdated(i, column);
+                return currentRow;
             }
         }
+        return -1;
     }
 
     private void setUpEventListeners() {
