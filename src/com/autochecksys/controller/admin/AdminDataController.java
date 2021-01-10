@@ -8,6 +8,7 @@ import com.autochecksys.controller.shared.AbstractController;
 import com.autochecksys.model.IAutoCheckSysModel;
 import com.autochecksys.model.Repository;
 import com.autochecksys.model.StockItem;
+import com.autochecksys.model.StockOrder;
 import com.autochecksys.view.shared.DisplayPanel;
 
 public class AdminDataController extends AbstractAdminDataController {
@@ -115,7 +116,15 @@ this.viewToControl = viewToControl;
     @Override
     public void createStockOrder(int itemId, int quantity) {
 //begin of modifiable zone(JavaCode)......C/c9f9f419-139f-40c0-b423-e3ed7d05ebfa
-
+        StockOrder newOrder = Repository.getRepositoryInstance().createStockOrder(itemId, quantity);
+        if (newOrder != null){
+            Repository.getRepositoryInstance().saveChanges();
+            String orderId = Integer.toString(newOrder.getOrderId());
+            String stockItemId = Integer.toString(newOrder.getStockItemId());
+            String quantityString = Integer.toString(newOrder.getQuantity());
+            String[] orderData = {orderId, stockItemId, quantityString};
+            updateView(new KeyValuePair("NewStockOrderDisplay", orderData, -1));
+        }
 //end of modifiable zone(JavaCode)........E/c9f9f419-139f-40c0-b423-e3ed7d05ebfa
     }
 
