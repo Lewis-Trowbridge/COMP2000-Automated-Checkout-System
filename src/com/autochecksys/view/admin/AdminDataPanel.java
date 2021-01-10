@@ -3,6 +3,7 @@ package com.autochecksys.view.admin;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import com.autochecksys.KeyValuePair;
 import com.autochecksys.controller.shared.AbstractController;
@@ -58,7 +59,27 @@ public class AdminDataPanel extends DisplayPanel {
         GridBagConstraintsBuilder builder = new GridBagConstraintsBuilder();
 
         Object[] itemColumns = {"ID", "Name", "Price", "Stock"};
-        tblItems = new JTable(new DefaultTableModel(itemColumns, 0));
+        tblItems = new JTable(new DefaultTableModel(itemColumns, 0)) {
+            // Override table cell renderer to colour the background of cells with less than 5 items
+            // left in stock
+            @Override
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                JComponent component = (JComponent) super.prepareRenderer(renderer, row, column);
+
+                if (Integer.parseInt(getValueAt(row, 3).toString()) < 5){
+                    component.setBackground(Color.RED);
+                    // Set the font to bold for items low on stock to communicate the problem without
+                    // solely relying on colour
+                    component.setFont(component.getFont().deriveFont(Font.BOLD, 12f));
+                }
+                else {
+                    // Set back to normal in case of an updated previously low-stock item
+                    component.setBackground(Color.WHITE);
+                    component.setFont(component.getFont().deriveFont(Font.PLAIN, 12f));
+                }
+                return component;
+            }
+        };
         srpItemTablePanel = new JScrollPane(tblItems);
         GridBagConstraints srpItemTablePanelConstraints = builder.setGridWidth(2).setFill(GridBagConstraints.BOTH).build();
 
@@ -128,20 +149,24 @@ public class AdminDataPanel extends DisplayPanel {
             case "NewStockItemDisplay":
                 String[] itemData = (String[]) change.value;
                 itemModel.addRow(itemData);
+                itemModel.fireTableDataChanged();
                 break;
             case "NewStockOrderDisplay":
                 String[] orderData = (String[]) change.value;
                 orderModel.addRow(orderData);
+                orderModel.fireTableDataChanged();
                 break;
             case "DeleteStockItem":
                 Integer stockIdToDelete = (Integer) change.value;
                 row = getRowWithId(stockIdToDelete, tblItems);
                 itemModel.removeRow(row);
+                itemModel.fireTableDataChanged();
                 break;
             case "FulfillStockOrder":
                 int orderIdToDelete = (int) change.value;
                 row = getRowWithId(orderIdToDelete, tblOrders);
                 orderModel.removeRow(row);
+                itemModel.fireTableDataChanged();
                 break;
             case AbstractController.ITEM_NAME:
                 String newName = (String) change.value;
@@ -166,7 +191,7 @@ public class AdminDataPanel extends DisplayPanel {
         DefaultTableModel model = (DefaultTableModel) tableToReplace.getModel();
         int row = getRowWithId(id, tableToReplace);
         model.setValueAt(value, row, column);
-        model.fireTableCellUpdated(row, column);
+        model.fireTableDataChanged();
     }
 
     // Utility method to get a row number in the physical table using a given ID
