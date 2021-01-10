@@ -237,6 +237,7 @@ orderWatcherThread.start();
             StockOrder orderToFulfill = stockOrders.get(orderId);
             StockItem itemToReplenish = stockItems.get(orderToFulfill.getStockItemId());
             itemToReplenish.setStockCount(itemToReplenish.getStockCount() + orderToFulfill.getQuantity());
+            stockOrders.remove(orderId);
             success = true;
         } catch (Exception e){
             success = false;
