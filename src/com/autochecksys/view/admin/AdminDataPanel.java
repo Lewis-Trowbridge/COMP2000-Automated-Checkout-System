@@ -136,6 +136,7 @@ public class AdminDataPanel extends DisplayPanel {
                 Integer stockIdToDelete = (Integer) change.value;
                 int row = getRowWithId(stockIdToDelete, tblItems);
                 itemModel.removeRow(row);
+                break;
             case AbstractController.ITEM_NAME:
                 String newName = (String) change.value;
                 replaceItemTableValueWithId(change.id, 1, newName, tblItems);

@@ -105,7 +105,10 @@ this.viewToControl = viewToControl;
     @Override
     public void deleteStockItem(int id) {
 //begin of modifiable zone(JavaCode)......C/db84e305-e9ed-41cf-8fd7-ae90ee922b63
-
+        if (Repository.getRepositoryInstance().deleteStockItem(id)){
+            Repository.getRepositoryInstance().saveChanges();
+            updateView(new KeyValuePair("DeleteStockItem", id, id));
+        }
 //end of modifiable zone(JavaCode)........E/db84e305-e9ed-41cf-8fd7-ae90ee922b63
     }
 
