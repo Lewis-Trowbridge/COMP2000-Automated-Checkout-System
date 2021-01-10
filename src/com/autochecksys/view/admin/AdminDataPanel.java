@@ -154,7 +154,7 @@ public class AdminDataPanel extends DisplayPanel {
 //end of modifiable zone(JavaCode)........E/1f76c533-4e4c-4297-aa9f-4d6645fa2c9a
     }
 
-    // Utility method to replace a value in the items
+    // Utility method to replace a value in a given table
     private void replaceItemTableValueWithId(int id, int column, String value, JTable tableToReplace){
         DefaultTableModel model = (DefaultTableModel) tableToReplace.getModel();
         int row = getRowWithId(id, tableToReplace);
@@ -162,6 +162,7 @@ public class AdminDataPanel extends DisplayPanel {
         model.fireTableCellUpdated(row, column);
     }
 
+    // Utility method to get a row number in the physical table using a given ID
     private int getRowWithId(int id, JTable tableToSearch){
         DefaultTableModel model = (DefaultTableModel) tableToSearch.getModel();
         for (int currentRow = 0; currentRow < model.getRowCount(); currentRow++){
@@ -226,6 +227,26 @@ public class AdminDataPanel extends DisplayPanel {
                     try {
                         controller.getClass().getDeclaredMethod("deleteStockItem", int.class).invoke(controller, currentId);
                     } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        btnAddOrder.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int currentItemRow = tblItems.getSelectedRow();
+                String currentItemId = (String) tblItems.getValueAt(currentItemRow, 0);
+                String currentItemName = (String) tblItems.getValueAt(currentItemRow, 1);
+                String dialogMessage = "Please input the quantity of " + currentItemName + " ordered.";
+                String stringQuantity = JOptionPane.showInputDialog(null, dialogMessage, "Ordering " + currentItemName, JOptionPane.PLAIN_MESSAGE);
+                if (stringQuantity != null) {
+                    int quantity = Integer.parseInt(stringQuantity);
+                    int currentItemIdInt = Integer.parseInt(currentItemId);
+                    try {
+                        controller.getClass().getDeclaredMethod("createStockOrder", int.class, int.class).invoke(controller, currentItemIdInt, quantity);
+                    } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | NumberFormatException ex) {
                         ex.printStackTrace();
                     }
                 }
