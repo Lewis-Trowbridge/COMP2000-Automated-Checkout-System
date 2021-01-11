@@ -57,21 +57,23 @@ public class PaymentController extends AbstractPaymentController {
 //begin of modifiable zone(JavaCode)......C/f56aea0e-d68b-4b1a-abc8-acdefcafe6a9
         // Initiate string builder to build entire receipt string
         StringBuilder receiptString = new StringBuilder();
-        // Iterate through all models in basket and add their names and prices to the receipt string using reflection
-        for (IAutoCheckSysModel model: basket) {
-            try {
-                Integer id = (Integer) model.getClass().getDeclaredMethod("getItemId").invoke(model);
-                Repository.getRepositoryInstance().decrementBoughtItem(id);
-                String name = (String)model.getClass().getDeclaredMethod("getItemName").invoke(model);
-                String price = Float.toString((Float)model.getClass().getDeclaredMethod("getItemPrice").invoke(model));
-                receiptString.append(name).append("     £").append(price).append("\n");
-            } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-                e.printStackTrace();
+        if (result.paymentSucceeded){
+            // Iterate through all models in basket and add their names and prices to the receipt string using reflection
+            for (IAutoCheckSysModel model: basket) {
+                try {
+                    Integer id = (Integer) model.getClass().getDeclaredMethod("getItemId").invoke(model);
+                    Repository.getRepositoryInstance().decrementBoughtItem(id);
+                    String name = (String)model.getClass().getDeclaredMethod("getItemName").invoke(model);
+                    String price = Float.toString((Float)model.getClass().getDeclaredMethod("getItemPrice").invoke(model));
+                    receiptString.append(name).append("     £").append(price).append("\n");
+                } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
             }
+            Repository.getRepositoryInstance().saveChanges();
+            // Add total to receipt
+            receiptString.append("Total paid: £").append(String.format("%.2f", totalToPay)).append("\n");
         }
-        Repository.getRepositoryInstance().saveChanges();
-        // Add total to receipt
-        receiptString.append("Total paid: £").append(String.format("%.2f", totalToPay)).append("\n");
         // Add payment message - this will contain all relevant information from the payment method
         receiptString.append(result.paymentMessage).append("\n");
         // Display in dialog to simulate the printing of a receipt
