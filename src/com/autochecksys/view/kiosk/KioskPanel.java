@@ -43,27 +43,34 @@ super(mainFrameToUse);
 //begin of modifiable zone................T/32ed2544-31bb-4081-86f0-64ff77155ffc
         this.setLayout(new GridBagLayout());
         GridBagConstraintsBuilder builder = new GridBagConstraintsBuilder();
+
         Object[] columns = {"ID", "Item", "Price"};
         tblItemDisplay = new JTable(new DefaultTableModel(columns, 0));
+
         srpTablePanel = new JScrollPane(tblItemDisplay);
         GridBagConstraints srpTablePanelConstraints = builder.setGridHeight(5).setFill(GridBagConstraints.BOTH).build();
+
         lblTotalPrice = new JLabel("Current total: £0.00");
         GridBagConstraints lblTotalPriceConstraints = builder.setGridY(5).setWeightY(0).setFill(GridBagConstraints.HORIZONTAL).build();
+
         JPanel scanPanel = new JPanel();
         scanPanel.setLayout(new GridBagLayout());
         GridBagConstraints scanPanelConstraints = builder.setGridY(6).setWeightY(0).setFill(GridBagConstraints.HORIZONTAL).build();
+
         txfBarcodeInput = new JTextField();
         GridBagConstraints txfBarcodeInputConstraints = builder.setGridWidth(3).setFill(GridBagConstraints.HORIZONTAL).build();
+
         btnBarcodeEnter = new JButton("Go");
         GridBagConstraints btnBarcodeEnterConstraints = builder.setGridX(4).setWeightX(0).setFill(GridBagConstraints.HORIZONTAL).build();
+
         btnGoToPayment = new JButton("Finish and pay");
         GridBagConstraints btnGoToPaymentConstraints = builder.setGridY(7).setWeightY(0).setFill(GridBagConstraints.HORIZONTAL).build();
-        
-        
-        this.add(srpTablePanel, srpTablePanelConstraints);
-        this.add(lblTotalPrice, lblTotalPriceConstraints);
+
         scanPanel.add(txfBarcodeInput, txfBarcodeInputConstraints);
         scanPanel.add(btnBarcodeEnter, btnBarcodeEnterConstraints);
+
+        this.add(srpTablePanel, srpTablePanelConstraints);
+        this.add(lblTotalPrice, lblTotalPriceConstraints);
         this.add(scanPanel, scanPanelConstraints);
         this.add(btnGoToPayment, btnGoToPaymentConstraints);
 
@@ -78,7 +85,7 @@ super(mainFrameToUse);
         switch (change.key) {
             case "StockItem":
                 StockItem newItem = (StockItem)change.value;
-                model.addRow(new String[] {Integer.toString(newItem.getItemId()), newItem.getItemName(), Float.toString(newItem.getItemPrice())});
+                model.addRow(new String[] {Integer.toString(newItem.getItemId()), newItem.getItemName(), String.format("%.2f", newItem.getItemPrice())});
                 break;
             case "Total":
                 lblTotalPrice.setText("Current total: £" + String.format("%.2f", (float)change.value));
